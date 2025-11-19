@@ -6,7 +6,9 @@
 <title>Historias - Fundación Plenitud</title>
 <link rel="stylesheet" href="styles.css">
 <style>
-  /* Estilos para la galería */
+  /* SOLO ESTILOS ESPECÍFICOS PARA HISTORIAS */
+  
+  /* Galería de carpetas */
   .folders-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -21,6 +23,7 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     cursor: pointer;
     transition: transform 0.2s;
+    border: 1px solid #eaeaea;
   }
   
   .folder-card:hover {
@@ -64,9 +67,10 @@
     text-align: center;
     padding: 20px;
     color: #666;
+    grid-column: 1 / -1;
   }
 
-  /* Sección admin DESPUÉS DEL FOOTER */
+  /* Sección admin */
   .admin-access {
     margin: 40px auto;
     padding: 20px;
@@ -75,6 +79,7 @@
     border-radius: 8px;
     max-width: 800px;
   }
+  
   .admin-access input {
     padding: 10px;
     width: 250px;
@@ -82,6 +87,7 @@
     border: 1px solid #ddd;
     border-radius: 4px;
   }
+  
   .admin-access button {
     padding: 10px 18px;
     background: #3467ff;
@@ -90,19 +96,21 @@
     cursor: pointer;
     border-radius: 6px;
   }
+  
   .admin-access button:hover {
     background: #234dcc;
   }
 
-  /* Google Drive SOLO para admins */
+  /* Google Drive */
   .google-drive-section {
     background: #f8f9fa;
     padding: 20px;
     border-radius: 8px;
     margin: 20px 0;
     border-left: 4px solid #4285f4;
-    display: none; /* Oculto por defecto */
+    display: none;
   }
+  
   .drive-upload-btn {
     background: #4285f4;
     color: white;
@@ -112,20 +120,24 @@
     cursor: pointer;
     margin: 10px 5px;
   }
+  
   .drive-upload-btn:hover {
     background: #3367d6;
   }
+  
   .auth-status {
     padding: 10px;
     border-radius: 4px;
     margin: 10px 0;
     font-weight: bold;
   }
+  
   .auth-status.connected {
     background: #e6f4ea;
     color: #137333;
     border: 1px solid #137333;
   }
+  
   .auth-status.disconnected {
     background: #fce8e6;
     color: #c5221f;
@@ -165,7 +177,7 @@
   </section>
 </main>
 
-<!-- FOOTER COMPLETO COMO EN TUS OTRAS PÁGINAS -->
+<!-- FOOTER -->
 <footer class="site-footer">
   <img src="images/umss.png" height="150" width="150" alt="UMSS">
   <img src="images/ColePsico.png" height="150" width="250" alt="Colegio de Psicólogos">
@@ -181,7 +193,7 @@
   </div>
 </footer>
 
-<!-- SECCIÓN ADMIN - COMPLETAMENTE SEPARADA DESPUÉS DEL FOOTER -->
+<!-- SECCIÓN ADMIN -->
 <section class="admin-access">
   <h3>🔐 Zona de Administración - Equipo Fundación Plenitud</h3>
   <p><em>Acceso exclusivo para el equipo administrativo de la fundación</em></p>
@@ -189,7 +201,7 @@
   <button onclick="accederAdmin()">Verificar Identidad</button>
   <p id="adminMsg"></p>
 
-  <!-- GOOGLE DRIVE - SOLO VISIBLE PARA ADMINS VERIFICADOS -->
+  <!-- GOOGLE DRIVE -->
   <div class="google-drive-section" id="googleDriveSection">
     <h4>📁 Gestión de Archivos - Drive Institucional</h4>
     <p><strong>Cuenta:</strong> fundacion.plenitud.bo@gmail.com</p>
@@ -221,6 +233,7 @@ const ADMIN_EMAILS = [
     "guentokhrjss@gmail.com"
 ];
 
+// IMPORTANTE: Reemplaza esto con tu Client ID real de Google Cloud Console
 const GOOGLE_CLIENT_ID = '368017886464-7skr4op806prp51l4etm8ovhseaigq8a.apps.googleusercontent.com';
 
 let isAdmin = false;
@@ -272,49 +285,63 @@ async function initGoogleDrive() {
     if (!isAdmin) return;
     
     try {
+        // Cargar la biblioteca de Google API
         await new Promise((resolve, reject) => {
+            if (typeof gapi === 'undefined') {
+                reject(new Error('Google API no se cargó correctamente'));
+                return;
+            }
+            
             gapi.load('client:auth2', {
                 callback: resolve,
                 onerror: reject,
-                timeout: 5000
+                timeout: 10000 // Aumentar timeout
             });
         });
         
+        // Inicializar el cliente de Google
         await gapi.client.init({
+            apiKey: '', // Si tienes una API Key, agrégala aquí
             clientId: GOOGLE_CLIENT_ID,
-            scope: 'https://www.googleapis.com/auth/drive.file',
-            discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest']
+            discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
+            scope: 'https://www.googleapis.com/auth/drive.file'
         });
         
         googleDriveInitialized = true;
+        console.log('✅ Google Drive inicializado correctamente');
         updateAuthStatus();
         
     } catch (error) {
-        console.error('❌ Error Google Drive:', error);
-        document.getElementById('authStatus').innerHTML = '❌ Error cargando Google Drive';
+        console.error('❌ Error inicializando Google Drive:', error);
+        document.getElementById('authStatus').innerHTML = '❌ Error cargando Google Drive: ' + error.message;
     }
 }
 
 function updateAuthStatus() {
-    if (!isAdmin) return;
+    if (!isAdmin || !googleDriveInitialized) return;
     
-    const auth = gapi.auth2.getAuthInstance();
-    const isSignedIn = auth.isSignedIn.get();
-    const authStatus = document.getElementById('authStatus');
-    const uploadSection = document.getElementById('uploadSection');
-    const authButton = document.getElementById('authButton');
-    
-    if (isSignedIn) {
-        const user = auth.currentUser.get();
-        authStatus.className = 'auth-status connected';
-        authStatus.innerHTML = `✅ Conectado al drive institucional`;
-        uploadSection.style.display = 'block';
-        authButton.textContent = '🔄 Cambiar Cuenta';
-    } else {
-        authStatus.className = 'auth-status disconnected';
-        authStatus.innerHTML = '🔒 Estado: No conectado al Drive institucional';
-        uploadSection.style.display = 'none';
-        authButton.textContent = '🔑 Conectar con Google Drive';
+    try {
+        const auth = gapi.auth2.getAuthInstance();
+        const isSignedIn = auth.isSignedIn.get();
+        const authStatus = document.getElementById('authStatus');
+        const uploadSection = document.getElementById('uploadSection');
+        const authButton = document.getElementById('authButton');
+        
+        if (isSignedIn) {
+            const user = auth.currentUser.get();
+            const profile = user.getBasicProfile();
+            authStatus.className = 'auth-status connected';
+            authStatus.innerHTML = `✅ Conectado al drive institucional como ${profile.getEmail()}`;
+            uploadSection.style.display = 'block';
+            authButton.textContent = '🔄 Cambiar Cuenta';
+        } else {
+            authStatus.className = 'auth-status disconnected';
+            authStatus.innerHTML = '🔒 Estado: No conectado al Drive institucional';
+            uploadSection.style.display = 'none';
+            authButton.textContent = '🔑 Conectar con Google Drive';
+        }
+    } catch (error) {
+        console.error('Error actualizando estado de autenticación:', error);
     }
 }
 
@@ -325,7 +352,7 @@ async function googleDriveAuth() {
     }
     
     if (!googleDriveInitialized) {
-        alert('Google Drive no está inicializado.');
+        alert('Google Drive no está inicializado. Intenta verificar tu identidad nuevamente.');
         return;
     }
     
@@ -340,6 +367,7 @@ async function googleDriveAuth() {
             updateAuthStatus();
         }
     } catch (error) {
+        console.error('Error de autenticación:', error);
         alert('Error de autenticación: ' + error.message);
     }
 }
@@ -380,6 +408,7 @@ async function uploadToDrive() {
         fileInput.value = '';
         
     } catch (error) {
+        console.error('Error subiendo archivos:', error);
         statusDiv.innerHTML = `❌ Error: ${error.message}`;
     } finally {
         uploadButton.disabled = false;
@@ -395,6 +424,8 @@ async function uploadFileToDrive(file, folderName = 'Fundacion-Plenitud') {
         mimeType: file.type
     };
     
+    const accessToken = gapi.auth.getToken().access_token;
+    
     const formData = new FormData();
     formData.append('metadata', new Blob([JSON.stringify(metadata)], {
         type: 'application/json'
@@ -402,40 +433,75 @@ async function uploadFileToDrive(file, folderName = 'Fundacion-Plenitud') {
     formData.append('file', file);
     
     const response = await fetch(
-        'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
+        'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name', {
         method: 'POST',
         headers: {
-            'Authorization': 'Bearer ' + gapi.auth.getToken().access_token
+            'Authorization': 'Bearer ' + accessToken
         },
         body: formData
     });
     
     if (!response.ok) {
-        throw new Error(`Error ${response.status}`);
+        const errorText = await response.text();
+        throw new Error(`Error ${response.status}: ${errorText}`);
     }
     
     return await response.json();
 }
 
 async function findOrCreateFolder(folderName) {
+    // Buscar si la carpeta ya existe
     const response = await gapi.client.drive.files.list({
         q: `name='${folderName}' and mimeType='application/vnd.google-apps.folder' and trashed=false`,
-        fields: 'files(id, name)'
+        fields: 'files(id, name)',
+        spaces: 'drive'
     });
     
     if (response.result.files.length > 0) {
         return response.result.files[0].id;
     }
     
+    // Crear la carpeta si no existe
+    const folderMetadata = {
+        name: folderName,
+        mimeType: 'application/vnd.google-apps.folder'
+    };
+    
     const folder = await gapi.client.drive.files.create({
-        resource: {
-            name: folderName,
-            mimeType: 'application/vnd.google-apps.folder'
-        },
+        resource: folderMetadata,
         fields: 'id'
     });
     
     return folder.result.id;
+}
+
+// ========== FUNCIONALIDAD DE CARPETAS ==========
+// Aquí va el código para crear, editar y borrar carpetas
+// que tenías en tu versión original
+
+// Ejemplo de funciones para carpetas:
+function crearCarpeta() {
+    if (!isAdmin) {
+        alert('Solo administradores pueden crear carpetas');
+        return;
+    }
+    // Lógica para crear carpeta
+}
+
+function borrarCarpeta(id) {
+    if (!isAdmin) {
+        alert('Solo administradores pueden borrar carpetas');
+        return;
+    }
+    // Lógica para borrar carpeta
+}
+
+function editarCarpeta(id) {
+    if (!isAdmin) {
+        alert('Solo administradores pueden editar carpetas');
+        return;
+    }
+    // Lógica para editar carpeta
 }
 </script>
 </body>
