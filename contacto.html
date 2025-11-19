@@ -14,6 +14,35 @@
   })();
 </script>
 
+<style>
+  /* Estilos adicionales para el formulario */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .modalidad-direccion {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    border-left: 3px solid #3467ff;
+  }
+</style>
+
 </head>
 
 <body>
@@ -30,7 +59,7 @@
       <a href="historias.html">Historias</a>
       <a href="patrocinio.html">Patrocinio</a>
       <a href="servicios.html">Servicios</a>
-      <a href="contacto.html" class="active">Contacto</a>
+      <a href="contacto.html" style="font-weight:bold;">Contacto</a>
     </nav>
   </div>
 </header>
@@ -48,51 +77,105 @@
 
   <form id="reservaForm">
 
-    <label>Nombre completo:</label>
-    <input type="text" id="nombre" required>
-
-    <label>WhatsApp del paciente:</label>
-    <input type="text" id="telefono" required>
-
-    <label>Tipo de paciente:</label>
-    <select id="tipoPaciente" required>
-      <option value="">Seleccione…</option>
-      <option value="general">Público general</option>
-      <option value="estudiante">Estudiante Fundación</option>
-    </select>
-
-    <div id="campoEstudiante" style="display:none;">
-      <label>Nombre del Estudiante Fundación:</label>
-      <input type="text" id="nombreEstudiante">
+    <div class="form-group">
+      <label>Nombre completo:</label>
+      <input type="text" id="nombre" required>
     </div>
 
-    <label>Profesional:</label>
-    <select id="profesional" required>
-      <option value="">Seleccione…</option>
-      <option value="Lic. Christian">Lic. Christian Claure T.</option>
-      <option value="Mgr. Sandra">Mgr. Sandra Aranda B.</option>
-      <option value="Lic. Fernando">Lic. Fernando de la Torre C.</option>
-    </select>
+    <div class="form-group">
+      <label>Sexo:</label>
+      <select id="sexo" required>
+        <option value="">Seleccione…</option>
+        <option value="Hombre">Hombre</option>
+        <option value="Mujer">Mujer</option>
+        <option value="Otros">Otros</option>
+      </select>
+    </div>
 
-    <label>Fecha:</label>
-    <input type="date" id="fecha" required>
+    <div class="form-group">
+      <label>Edad:</label>
+      <input type="number" id="edad" min="1" max="120" placeholder="Ingrese su edad" required>
+    </div>
 
-    <label>Hora:</label>
-    <select id="hora" required>
-      <option value="">Seleccione…</option>
-      <optgroup label="Mañana">
-        <option value="09:00">09:00</option>
-        <option value="10:00">10:00</option>
-        <option value="11:00">11:00</option>
-      </optgroup>
-      <optgroup label="Tarde">
-        <option value="14:00">14:00</option>
-        <option value="15:00">15:00</option>
-        <option value="16:00">16:00</option>
-        <option value="17:00">17:00</option>
-        <option value="18:00">18:00</option>
-      </optgroup>
-    </select>
+    <div class="form-group">
+      <label>Ciudad:</label>
+      <input type="text" id="ciudad" placeholder="Ingrese su ciudad" required>
+    </div>
+
+    <div class="form-group">
+      <label>WhatsApp del paciente:</label>
+      <input type="text" id="telefono" required>
+    </div>
+
+    <div class="form-group">
+      <label>Tipo de paciente:</label>
+      <select id="tipoPaciente" required>
+        <option value="">Seleccione…</option>
+        <option value="general">Público general</option>
+        <option value="estudiante">Estudiante Fundación</option>
+      </select>
+    </div>
+
+    <div id="campoEstudiante" style="display:none;">
+      <div class="form-group">
+        <label>Nombre del Estudiante Fundación:</label>
+        <input type="text" id="nombreEstudiante">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Motivo de consulta:</label>
+      <textarea id="motivoConsulta" rows="3" placeholder="Describa brevemente el motivo de su consulta" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Profesional:</label>
+      <select id="profesional" required>
+        <option value="">Seleccione…</option>
+        <option value="Lic. Christian">Lic. Christian Claure T.</option>
+        <option value="Mgr. Sandra">Mgr. Sandra Aranda B.</option>
+        <option value="Lic. Fernando">Lic. Fernando de la Torre C.</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Modalidad de consulta:</label>
+      <select id="modalidad" required>
+        <option value="">Seleccione…</option>
+        <option value="Presencial">Presencial</option>
+        <option value="Virtual">Virtual</option>
+      </select>
+    </div>
+
+    <div id="infoModalidad" style="display:none;">
+      <div class="modalidad-direccion">
+        <p id="textoModalidad"></p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Fecha:</label>
+      <input type="date" id="fecha" required>
+    </div>
+
+    <div class="form-group">
+      <label>Hora:</label>
+      <select id="hora" required>
+        <option value="">Seleccione…</option>
+        <optgroup label="Mañana">
+          <option value="09:00">09:00</option>
+          <option value="10:00">10:00</option>
+          <option value="11:00">11:00</option>
+        </optgroup>
+        <optgroup label="Tarde">
+          <option value="14:00">14:00</option>
+          <option value="15:00">15:00</option>
+          <option value="16:00">16:00</option>
+          <option value="17:00">17:00</option>
+          <option value="18:00">18:00</option>
+        </optgroup>
+      </select>
+    </div>
 
     <h4>Costo de la sesión</h4>
     <p id="costoTexto"><b>Primera sesión: 250 Bs</b></p>
@@ -163,6 +246,22 @@ document.getElementById("tipoPaciente").addEventListener("change", function () {
       : "<b>Primera sesión: 250 Bs | Siguientes: 150 Bs</b>";
 });
 
+// Mostrar información de modalidad
+document.getElementById("modalidad").addEventListener("change", function () {
+  const infoModalidad = document.getElementById("infoModalidad");
+  const textoModalidad = document.getElementById("textoModalidad");
+  
+  if (this.value === "Presencial") {
+    infoModalidad.style.display = "block";
+    textoModalidad.innerHTML = "<strong>Dirección del consultorio:</strong> Calle Quilla #100 entre Intiraymi y Av. Beijing";
+  } else if (this.value === "Virtual") {
+    infoModalidad.style.display = "block";
+    textoModalidad.innerHTML = "<strong>Link de Video Llamada:</strong> Se le enviará el enlace de la videollamada por WhatsApp antes de su cita.";
+  } else {
+    infoModalidad.style.display = "none";
+  }
+});
+
 // Conversión Base64
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
@@ -192,13 +291,18 @@ document.getElementById("reservaForm").addEventListener("submit", async e => {
   const comprobanteB64 = await fileToBase64(archivo);
 
   const data = {
-    nombre: nombre.value,
-    telefono: telefono.value,
-    tipoPaciente: tipoPaciente.value,
-    nombreEstudiante: nombreEstudiante.value || "",
-    profesional: profesional.value,
-    fecha: fecha.value,
-    hora: hora.value,
+    nombre: document.getElementById("nombre").value,
+    sexo: document.getElementById("sexo").value,
+    edad: document.getElementById("edad").value,
+    ciudad: document.getElementById("ciudad").value,
+    telefono: document.getElementById("telefono").value,
+    tipoPaciente: document.getElementById("tipoPaciente").value,
+    nombreEstudiante: document.getElementById("nombreEstudiante").value || "",
+    motivoConsulta: document.getElementById("motivoConsulta").value,
+    profesional: document.getElementById("profesional").value,
+    modalidad: document.getElementById("modalidad").value,
+    fecha: document.getElementById("fecha").value,
+    hora: document.getElementById("hora").value,
     comprobante: comprobanteB64
   };
 
@@ -218,7 +322,7 @@ document.getElementById("reservaForm").addEventListener("submit", async e => {
 
   const celular = telefonos[data.profesional];
   const mensaje =
-    `🔔 Nueva Reserva%0A👤 ${data.nombre}%0A📅 ${data.fecha}%0A⏰ ${data.hora}`;
+    `🔔 Nueva Reserva%0A👤 ${data.nombre}%0A⚧️ ${data.sexo}%0A🎂 ${data.edad} años%0A🏙️ ${data.ciudad}%0A📅 ${data.fecha}%0A⏰ ${data.hora}%0A💻 ${data.modalidad}%0A📝 ${data.motivoConsulta}`;
 
   fetch(`https://api.callmebot.com/whatsapp.php?phone=${celular}&text=${mensaje}&apikey=348275`);
 
@@ -231,8 +335,13 @@ document.getElementById("reservaForm").addEventListener("submit", async e => {
 
   emailjs.send("service_bj6yafl", "template_k35sy5s", {
     nombre: data.nombre,
+    sexo: data.sexo,
+    edad: data.edad,
+    ciudad: data.ciudad,
     telefono: data.telefono,
     profesional: data.profesional,
+    modalidad: data.modalidad,
+    motivoConsulta: data.motivoConsulta,
     fecha: data.fecha,
     hora: data.hora,
     correo_destino: correos[data.profesional],
@@ -242,6 +351,7 @@ document.getElementById("reservaForm").addEventListener("submit", async e => {
   document.getElementById("respuesta").innerHTML =
     "Reserva enviada correctamente. Le confirmaremos por WhatsApp.";
   document.getElementById("reservaForm").reset();
+  document.getElementById("infoModalidad").style.display = "none";
 });
 </script>
 
