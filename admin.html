@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin - Historias | Fundación Plenitud</title>
+<link rel="stylesheet" href="styles.css">
+
+<!-- Google Identity Services -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<style>
+  body { font-family: Arial, sans-serif; background:#f4f7fb; color:#253237; }
+  .wrap { max-width:1100px; margin:30px auto; background:#fff; padding:18px;
+          border-radius:10px; box-shadow:0 4px 18px rgba(0,0,0,0.06); }
+  h1{color:#2b6b6b}
+  .row{display:flex;gap:16px;align-items:flex-start}
+  .col{flex:1}
+  .btn{background:#2b6b6b;color:#fff;padding:8px 12px;border-radius:6px;
+       border:none;cursor:pointer}
+  .mini{background:#e6f3f3;padding:8px;border-radius:8px}
+  .activity-card{border:1px solid #e6eef0;padding:10px;border-radius:8px;margin-bottom:10px}
+  input,textarea,select{width:100%;padding:8px;margin-top:6px;border:1px solid #dfe8e8;border-radius:6px}
+  .hidden{display:none}
+  footer#admin-footer {opacity:0; height:1px; pointer-events:none}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+  <h1>Panel Admin — Historias</h1>
+
+  <!-- LOGIN GOOGLE -->
+  <div id="g_id_onload"
+       data-client_id="368017886464-7skr4op806prp51l4etm8ovhseaigq8a.apps.googleusercontent.com"
+       data-callback="handleCredentialResponse"
+       data-auto_prompt="false">
+  </div>
+  <div class="g_id_signin" data-type="standard"></div>
+
+  <!-- INTERFAZ ADMINISTRACIÓN -->
+  <div id="admin-ui" class="hidden">
+    <p>Conectado como: <strong id="userEmail"></strong></p>
+
+    <!-- Crear actividad (carpeta + html) -->
+    <section style="margin-top:10px">
+      <h3>Crear nueva actividad</h3>
+      <div class="mini">
+        <label>Título</label>
+        <input id="actTitle" placeholder="Ej: Taller Artístico - Octubre">
+
+        <label>Descripción (opcional)</label>
+        <textarea id="actDesc" rows="3"></textarea>
+
+        <button id="btnCreate" class="btn">Crear actividad</button>
+      </div>
+    </section>
+
+    <!-- Actividades existentes -->
+    <section style="margin-top:18px">
+      <h3>Actividades existentes</h3>
+      <div id="activitiesList"></div>
+    </section>
+
+    <!-- Subir archivos -->
+    <section style="margin-top:18px">
+      <h3>Subir imágenes / videos a una actividad</h3>
+      <label>Selecciona actividad</label>
+      <select id="selectActivity"></select>
+
+      <label>Archivo(s) (imagen o video)</label>
+      <input type="file" id="files" multiple accept="image/*,video/*">
+
+      <label>Descripción para los archivos (opcional)</label>
+      <input id="fileDesc" placeholder="Ej: Fotos del taller">
+
+      <button id="btnUpload" class="btn">Subir archivos</button>
+    </section>
+
+    <!-- Administradores -->
+    <section style="margin-top:18px">
+      <h3>Administradores</h3>
+      <p>Correos permitidos:</p>
+      <ul id="adminsList"></ul>
+
+      <label>Agregar correo</label>
+      <input id="newAdmin" placeholder="ej: nombre@gmail.com">
+
+      <button id="btnAddAdmin" class="btn">Agregar admin</button>
+    </section>
+
+    <section style="margin-top:18px">
+      <button id="btnSignOut" class="btn" style="background:#b56576">Cerrar sesión</button>
+    </section>
+  </div>
+</div>
+
+<footer id="admin-footer"></footer>
+
+<script>
+// URL de tu WebApp — YA COLOCADO
+const ADMIN_API = "https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhpKJw__kHHyFWCvxwpttso9IyTZpHHmZHUOC5CgZ9gs2YyY0fe5dYWXA1XrCVFBDsRy2pIqYy6ohBvT3_zSNw_2j9gCkN2uixZnMP9ezl01_xoLuZuDjink1ABK9_IjlF9z-s3gers_NV7Ry8Uo1eZQaxmte1zLXnfokZbyrHvTZVo42c_Fwxi_I01MyQILnacGSEzAnF3MZ-VI7SHdF6uttceXpfKG3DN6pHSvaRmKdJzJoVlix6pv853i4_5yMtdxGj2U21MqaQa0gxxD9Ngoh9FcA&lib=MzECWN20TXOcJ5q5cmk23TrrvFoePlA8O";
+
+// TODO el JS del panel se insertará luego aquí.
+</script>
+
+</body>
+</html>

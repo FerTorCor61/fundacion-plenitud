@@ -1,0 +1,246 @@
+:root{
+    --primary: #2b6b6b; 
+    --accent: #b56576; 
+    --muted: #f4f6f5; 
+    --text: #253237;
+}
+
+/* Reset */
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    color: var(--text);
+    background: var(--muted);
+}
+
+/* INFO OFICIAL */
+.official-info {
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--primary);
+    margin: 10px 0 20px 0;
+    padding: 8px;
+    border: 1px solid var(--primary);
+    border-radius: 4px;
+    background-color: #e6f3f3;
+}
+
+.container{
+    width: 95%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* HEADER */
+.site-header{
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.site-header .container{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo img{
+    height: 60px;
+}
+
+.main-nav{
+    flex: 1;
+}
+
+.main-nav a{
+    margin-right: 12px;
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: bold;
+    padding: 10px;
+}
+
+.main-nav a.active{
+    color: var(--accent);
+}
+
+/* CONTENEDORES */
+.page{
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+/* FORMULARIOS */
+form{
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    margin-bottom: 25px;
+}
+
+form h3{
+    margin-top: 0;
+    color: var(--primary);
+}
+
+label{
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+input, select, textarea{
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+}
+
+textarea{
+    resize: none;
+    height: 80px;
+}
+
+/* BOTÓN */
+button{
+    margin-top: 18px;
+    background: var(--accent);
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+button:hover{
+    opacity: 0.9;
+}
+
+/* ESTADO DE CARGA */
+.loading{
+    padding: 10px;
+    margin-top: 10px;
+    background: #e8f0f0;
+    border-left: 4px solid var(--primary);
+    color: var(--primary);
+    display: none;
+}
+
+/* CONFIRMACIÓN */
+.success{
+    padding: 12px;
+    background: #dff3e3;
+    border-left: 4px solid #3b8c4a;
+    margin-top: 15px;
+    color: #2b5f34;
+    font-weight: bold;
+    display: none;
+}
+
+/* ERROR */
+.error{
+    padding: 12px;
+    background: #ffe6e6;
+    border-left: 4px solid #b82020;
+    margin-top: 15px;
+    color: #7a1c1c;
+    font-weight: bold;
+    display: none;
+}
+
+/* CUADRO DEL CÓDIGO QR */
+.qr-box{
+    margin-top: 15px;
+    padding: 15px;
+    background: #f4f4f4;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.qr-box img{
+    width: 200px;
+    margin-top: 10px;
+}
+
+/* CAMPOS OBLIGATORIOS */
+input:required, select:required, textarea:required{
+    border-left: 3px solid var(--primary);
+}
+
+/* TABLAS */
+.calendar{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.calendar th,
+.calendar td{
+    border: 1px solid #eee;
+    padding: 10px;
+    text-align: left;
+}
+
+/* FOOTER */
+.site-footer{
+    background: var(--primary);
+    color: #fff;
+    padding: 16px;
+    margin-top: 20px;
+    border-radius: 6px;
+}
+
+.site-footer img{
+    margin-right: 20px;
+}
+
+/* GRID DE EQUIPO (QUIENES SOMOS) */
+.team-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px;
+    margin: 30px auto;
+    max-width: 900px;
+}
+
+.team-grid div {
+    text-align: center; 
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.team-grid img {
+    width: 100%;
+    height: 300px; 
+    object-fit: cover; 
+    border-radius: 5px;
+    max-width: 400px; 
+    display: block;
+    margin: 0 auto;
+}
+
+/* RESPONSIVE */
+@media(max-width: 700px){
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+    .team-grid img {
+        height: auto;
+    }
+}

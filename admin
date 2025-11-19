@@ -1,0 +1,164 @@
+// admin.js
+const WEBAPP = ""https://script.google.com/macros/s/AKfycbxQjE5uC-SUM1IK5GGKGmF7Da7sPN4J7EgNJMk5XTduAnyyVqjwgSqwSIutu88hbJIf7Q/exec""; // <- pega tu URL de Apps Script deploy aquí
+
+let userEmail = null;
+const allowedAdminsCacheKey = "plenus_allowed_admins";
+
+// manejador del token de Google Identity Services
+function handleCredentialResponse(response) {
+  // response.credential es un ID token
+  verifyIdTokenWithServer(response.credential);
+}
+
+async function verifyIdTokenWithServer(id_token) {
+  const res = await fetch(WEBAPP + '?action=verifyToken', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ id_token })
+  });
+  const js = await res.json();
+  if (js.ok && js.email) {
+    userEmail = js.email;
+    initAdminUI(js);
+  } else {
+    alert("Acceso denegado. Contacta al administrador.");
+  }
+}
+
+function initAdminUI(serverData) {
+  document.getElementById('admin-ui').classList.remove('hidden');
+  document.getElementById('userEmail').textContent = serverData.email;
+  refreshLists();
+  // attach buttons
+  document.getElementById('btnCreate').onclick = createActivity;
+  document.getElementById('btnUpload').onclick = uploadFiles;
+  document.getElementById('btnAddAdmin').onclick = addAdmin;
+  document.getElementById('btnSignOut').onclick = signOut;
+}
+
+async function refreshLists(){
+  const res = await fetch(WEBAPP + '?action=listActivities');
+  const js = await res.json();
+  populateActivities(js.activities || []);
+  populateAdmins(js.admins || []);
+}
+
+function populateActivities(list){
+  const container = document.getElementById('activitiesList');
+  const sel = document.getElementById('selectActivity');
+  container.innerHTML = '';
+  sel.innerHTML = '<option value="">Seleccione…</option>';
+  list.forEach(a=>{
+    const div = document.createElement('div');
+    div.className = 'activity-card';
+    div.innerHTML = `<strong>${a.title}</strong><p>${a.desc||''}</p>
+      <p><small>ID: ${a.folderId}</small></p>
+      <button data-folder="${a.folderId}" class="btn" onclick="openActivityFolder('${a.folderId}')">Abrir carpeta</button>
+      <button data-folder="${a.folderId}" class="btn" style="background:#b56576" onclick="regenActivity('${a.folderId}')">Regenerar HTML</button>`;
+    container.appendChild(div);
+
+    const opt = document.createElement('option');
+    opt.value = a.folderId;
+    opt.textContent = a.title;
+    sel.appendChild(opt);
+  });
+}
+
+function populateAdmins(admins){
+  const ul = document.getElementById('adminsList');
+  ul.innerHTML = '';
+  admins.forEach(a=>{
+    const li = document.createElement('li');
+    li.textContent = a;
+    ul.appendChild(li);
+  });
+}
+
+// acciones
+async function createActivity(){
+  const title = document.getElementById('actTitle').value.trim();
+  const desc = document.getElementById('actDesc').value.trim();
+  if(!title){ alert('Escribe un título'); return; }
+  const res = await fetch(WEBAPP + '?action=createActivity', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ title, desc })
+  });
+  const js = await res.json();
+  if(js.ok) { alert('Actividad creada'); refreshLists(); }
+  else alert('Error: '+(js.error||''));
+}
+
+async function uploadFiles(){
+  const folderId = document.getElementById('selectActivity').value;
+  if(!folderId){ alert('Selecciona una actividad'); return; }
+  const files = document.getElementById('files').files;
+  if(!files.length){ alert('Selecciona al menos un archivo'); return; }
+  const desc = document.getElementById('fileDesc').value || '';
+
+  // enviamos uno por uno (puedes paralelizar si quieres)
+  for(let f of files){
+    const b64 = await fileToBase64(f);
+    const payload = {
+      action: 'uploadFile',
+      folderId,
+      filename: f.name,
+      mime: f.type || 'application/octet-stream',
+      base64: b64,
+      desc
+    };
+    const r = await fetch(WEBAPP, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    await r.json();
+  }
+  alert('Archivos subidos');
+  refreshLists();
+}
+
+async function addAdmin(){
+  const email = document.getElementById('newAdmin').value.trim();
+  if(!email){ alert('Ingresa un correo'); return; }
+  const res = await fetch(WEBAPP + '?action=addAdmin', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ email })
+  });
+  const js = await res.json();
+  if(js.ok){ alert('Admin agregado'); refreshLists(); }
+  else alert('Error: '+(js.error||''));
+}
+
+// helper: open folder in Drive
+function openActivityFolder(folderId){
+  window.open(`https://drive.google.com/drive/folders/${folderId}`, '_blank');
+}
+
+// regen single activity html on server
+async function regenActivity(folderId){
+  const res = await fetch(WEBAPP + '?action=regenActivity&folderId='+encodeURIComponent(folderId));
+  const js = await res.json();
+  if(js.ok) alert('Actividad regenerada');
+  else alert('Error: '+(js.error||''));
+}
+
+// signout (simple)
+function signOut(){
+  // remove UI
+  document.getElementById('admin-ui').classList.add('hidden');
+  document.getElementById('userEmail').textContent = '';
+  // try to revoke token via google accounts if needed
+  alert('Sesión cerrada localmente');
+}
+
+// utilidad base64
+function fileToBase64(file){
+  return new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = e => reject(e);
+    reader.readAsDataURL(file);
+  });
+}
