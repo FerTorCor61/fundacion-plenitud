@@ -244,3 +244,32 @@ input:required, select:required, textarea:required{
         height: auto;
     }
 }
+/* Estilos para el grid del equipo */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+    padding: 20px 0;
+}
+
+.team-grid img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    border: 3px solid #3467ff;
+}
+
+.team-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.team-grid a {
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
