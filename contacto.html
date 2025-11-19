@@ -41,6 +41,34 @@
     margin-top: 10px;
     border-left: 3px solid #3467ff;
   }
+
+  .qr-image {
+    width: 250px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+
+  .checkbox-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: center;
+  }
+
+  .submit-btn {
+    margin-top: 15px;
+    background: #3467ff;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .submit-btn:hover {
+    background: #234dcc;
+  }
 </style>
 
 </head>
@@ -59,11 +87,10 @@
       <a href="historias.html">Historias</a>
       <a href="patrocinio.html">Patrocinio</a>
       <a href="servicios.html">Servicios</a>
-      <a href="contacto.html">Contacto</a>
+      <a href="contacto.html" style="font-weight:bold;">Contacto</a>
     </nav>
   </div>
 </header>
-
 
 <main class="container">
 
@@ -71,19 +98,19 @@
   <h1>Reserva tu Cita</h1>
 
   <h2>Horario de atención</h2>
-  <h2><p>Lun-Vie 09:00-12:00 | 14:00-18:00</p></h2>
+  <p class="horario-texto">Lun-Vie 09:00-12:00 | 14:00-18:00</p>
 
   <h3 style="margin-top:30px;">Formulario de Reserva</h3>
 
   <form id="reservaForm">
 
     <div class="form-group">
-      <label>Nombre completo:</label>
+      <label for="nombre">Nombre completo:</label>
       <input type="text" id="nombre" required>
     </div>
 
     <div class="form-group">
-      <label>Sexo:</label>
+      <label for="sexo">Sexo:</label>
       <select id="sexo" required>
         <option value="">Seleccione…</option>
         <option value="Hombre">Hombre</option>
@@ -93,22 +120,22 @@
     </div>
 
     <div class="form-group">
-      <label>Edad:</label>
+      <label for="edad">Edad:</label>
       <input type="number" id="edad" min="1" max="120" placeholder="Ingrese su edad" required>
     </div>
 
     <div class="form-group">
-      <label>Ciudad:</label>
+      <label for="ciudad">Ciudad:</label>
       <input type="text" id="ciudad" placeholder="Ingrese su ciudad" required>
     </div>
 
     <div class="form-group">
-      <label>WhatsApp del paciente:</label>
-      <input type="text" id="telefono" required>
+      <label for="telefono">WhatsApp del paciente:</label>
+      <input type="tel" id="telefono" required>
     </div>
 
     <div class="form-group">
-      <label>Tipo de paciente:</label>
+      <label for="tipoPaciente">Tipo de paciente:</label>
       <select id="tipoPaciente" required>
         <option value="">Seleccione…</option>
         <option value="general">Público general</option>
@@ -118,18 +145,18 @@
 
     <div id="campoEstudiante" style="display:none;">
       <div class="form-group">
-        <label>Nombre del Estudiante Fundación:</label>
+        <label for="nombreEstudiante">Nombre del Estudiante Fundación:</label>
         <input type="text" id="nombreEstudiante">
       </div>
     </div>
 
     <div class="form-group">
-      <label>Motivo de consulta:</label>
+      <label for="motivoConsulta">Motivo de consulta:</label>
       <textarea id="motivoConsulta" rows="3" placeholder="Describa brevemente el motivo de su consulta" required></textarea>
     </div>
 
     <div class="form-group">
-      <label>Profesional:</label>
+      <label for="profesional">Profesional:</label>
       <select id="profesional" required>
         <option value="">Seleccione…</option>
         <option value="Lic. Christian">Lic. Christian Claure T.</option>
@@ -139,7 +166,7 @@
     </div>
 
     <div class="form-group">
-      <label>Modalidad de consulta:</label>
+      <label for="modalidad">Modalidad de consulta:</label>
       <select id="modalidad" required>
         <option value="">Seleccione…</option>
         <option value="Presencial">Presencial</option>
@@ -154,12 +181,12 @@
     </div>
 
     <div class="form-group">
-      <label>Fecha:</label>
+      <label for="fecha">Fecha:</label>
       <input type="date" id="fecha" required>
     </div>
 
     <div class="form-group">
-      <label>Hora:</label>
+      <label for="hora">Hora:</label>
       <select id="hora" required>
         <option value="">Seleccione…</option>
         <optgroup label="Mañana">
@@ -183,67 +210,74 @@
     <h3 style="margin-top:30px;">Pagar para Confirmar Reserva</h3>
     <p>Escanee el QR y luego marque la confirmación.</p>
 
-    <img src="images/QR.png" style="width:250px;border:1px solid #ccc;margin-bottom:10px;">
+    <img src="images/QR.png" alt="Código QR para pago - Fundación Plenitud" class="qr-image">
 
-    <label style="display:flex; gap:10px; margin-top:10px;">
-      <input type="checkbox" id="confirmarPago" required> Confirmo que realicé el pago mediante QR.
-    </label>
+    <div class="checkbox-group">
+      <input type="checkbox" id="confirmarPago" required>
+      <label for="confirmarPago">Confirmo que realicé el pago mediante QR.</label>
+    </div>
 
-    <label style="margin-top:20px;">Subir comprobante (captura o foto):</label>
-    <input type="file" id="comprobante" accept="image/*" required>
+    <div class="form-group">
+      <label for="comprobante">Subir comprobante (captura o foto):</label>
+      <input type="file" id="comprobante" accept="image/*" required>
+    </div>
 
-    <button type="submit" class="btn" style="margin-top:15px;">Enviar Reserva</button>
+    <button type="submit" class="submit-btn">Enviar Reserva</button>
   </form>
 
   <p id="respuesta" style="margin-top:20px;color:green;font-weight:bold;"></p>
 
 </section>
 
-
 <section class="page">
-<h3>Nuestra Ubicación</h3>
-<h3 style="margin-top:10px;margin-bottom:10px;">Calle Quilla #100 entre Intiraymi y Av. Beijing</h3>
+  <h3>Nuestra Ubicación</h3>
+  <p class="direccion-texto">Calle Quilla #100 entre Intiraymi y Av. Beijing</p>
 
-<iframe 
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3809.5898801967265!2d-66.17931302488737!3d-17.36934850549416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e506e7884145c1%3A0x7d6a5c13e551f1f!2sFundaci%C3%B3n%20Plenitud!5e0!3m2!1ses!2sbo!4v1703648400000!5m2!1ses!2sbo"
-  width="100%" height="450" style="border:0;margin-bottom:30px;" allowfullscreen loading="lazy"></iframe>
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3809.5898801967265!2d-66.17931302488737!3d-17.36934850549416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e506e7884145c1%3A0x7d6a5c13e551f1f!2sFundaci%C3%B3n%20Plenitud!5e0!3m2!1ses!2sbo!4v1703648400000!5m2!1ses!2sbo"
+    width="100%" height="450" style="border:0;margin-bottom:30px;" allowfullscreen loading="lazy" 
+    title="Ubicación de Fundación Plenitud en Google Maps">
+  </iframe>
 </section>
 
 </main>
 
-
 <footer class="site-footer">
-
-  <img src="images/umss.png" height="150" width="150">
-  <img src="images/ColePsico.png" height="150" width="250">
-  <img src="images/humanidades.jpg" height="150" width="250">
-  <img src="images/posgrado.jpg" height="150" width="250">
-
   <div class="container">
-    <p>WhatsApp: (+591) 674-13-716 | Correo: <a href="mailto:fundacion.plenitud.bo@gmail.com">fundacion.plenitud.bo@gmail.com</a></p>
-    <p>WhatsApp: (+591) 674-39-286 | Teléfono: (+591 - 4) 428-40-25</p>
-    <p>WhatsApp: (+591) 626-90-019 </p>
-    <p>&copy; 2025 Fundación Plenitud. Todos los derechos reservados.</p>
+    <div class="footer-logos">
+      <img src="images/umss.png" alt="UMSS" height="150" width="150">
+      <img src="images/ColePsico.png" alt="Colegio de Psicólogos" height="150" width="250">
+      <img src="images/humanidades.jpg" alt="Facultad de Humanidades" height="150" width="250">
+      <img src="images/posgrado.jpg" alt="Posgrado" height="150" width="250">
+    </div>
+    
+    <div class="contact-info">
+      <p>WhatsApp: (+591) 674-13-716 | Correo: <a href="mailto:fundacion.plenitud.bo@gmail.com">fundacion.plenitud.bo@gmail.com</a></p>
+      <p>WhatsApp: (+591) 674-39-286 | Teléfono: (+591 - 4) 428-40-25</p>
+      <p>WhatsApp: (+591) 626-90-019</p>
+      <p>Facebook: <a href="https://www.facebook.com/fundacionplenitudbolivia">Fundación Plenitud</a></p>
+      <p>NIT: 382663023 - Régimen General | Reconocimiento Legal: Decreto Departamental N° 3973</p>
+      <p>&copy; 2025 Fundación Plenitud. Todos los derechos reservados.</p>
+    </div>
   </div>
-
 </footer>
-
-
 
 <script>
 // WebApp de Google
-const GOOGLE_WEBAPP_URL =
-  "https://script.google.com/macros/s/AKfycbxQjE5uC-SUM1IK5GGKGmF7Da7sPN4J7EgNJMk5XTduAnyyVqjwgSqwSIutu88hbJIf7Q/exec";
+const GOOGLE_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxQjE5uC-SUM1IK5GGKGmF7Da7sPN4J7EgNJMk5XTduAnyyVqjwgSqwSIutu88hbJIf7Q/exec";
 
 // Mostrar campo del estudiante
 document.getElementById("tipoPaciente").addEventListener("change", function () {
-  document.getElementById("campoEstudiante").style.display =
-    this.value === "estudiante" ? "block" : "none";
-
-  document.getElementById("costoTexto").innerHTML =
-    this.value === "estudiante"
-      ? "<b>Estudiante Fundación: 90 Bs / sesión</b>"
-      : "<b>Primera sesión: 250 Bs | Siguientes: 150 Bs</b>";
+  const campoEstudiante = document.getElementById("campoEstudiante");
+  const costoTexto = document.getElementById("costoTexto");
+  
+  if (this.value === "estudiante") {
+    campoEstudiante.style.display = "block";
+    costoTexto.innerHTML = "<b>Estudiante Fundación: 90 Bs / sesión</b>";
+  } else {
+    campoEstudiante.style.display = "none";
+    costoTexto.innerHTML = "<b>Primera sesión: 250 Bs | Siguientes: 150 Bs</b>";
+  }
 });
 
 // Mostrar información de modalidad
@@ -272,7 +306,6 @@ function fileToBase64(file) {
   });
 }
 
-
 // ENVÍO FORMULARIO
 document.getElementById("reservaForm").addEventListener("submit", async e => {
   e.preventDefault();
@@ -288,70 +321,76 @@ document.getElementById("reservaForm").addEventListener("submit", async e => {
     return;
   }
 
-  const comprobanteB64 = await fileToBase64(archivo);
+  try {
+    const comprobanteB64 = await fileToBase64(archivo);
 
-  const data = {
-    nombre: document.getElementById("nombre").value,
-    sexo: document.getElementById("sexo").value,
-    edad: document.getElementById("edad").value,
-    ciudad: document.getElementById("ciudad").value,
-    telefono: document.getElementById("telefono").value,
-    tipoPaciente: document.getElementById("tipoPaciente").value,
-    nombreEstudiante: document.getElementById("nombreEstudiante").value || "",
-    motivoConsulta: document.getElementById("motivoConsulta").value,
-    profesional: document.getElementById("profesional").value,
-    modalidad: document.getElementById("modalidad").value,
-    fecha: document.getElementById("fecha").value,
-    hora: document.getElementById("hora").value,
-    comprobante: comprobanteB64
-  };
+    const data = {
+      nombre: document.getElementById("nombre").value,
+      sexo: document.getElementById("sexo").value,
+      edad: document.getElementById("edad").value,
+      ciudad: document.getElementById("ciudad").value,
+      telefono: document.getElementById("telefono").value,
+      tipoPaciente: document.getElementById("tipoPaciente").value,
+      nombreEstudiante: document.getElementById("nombreEstudiante").value || "",
+      motivoConsulta: document.getElementById("motivoConsulta").value,
+      profesional: document.getElementById("profesional").value,
+      modalidad: document.getElementById("modalidad").value,
+      fecha: document.getElementById("fecha").value,
+      hora: document.getElementById("hora").value,
+      comprobante: comprobanteB64
+    };
 
-  // Enviar a Google WebApp
-  await fetch(GOOGLE_WEBAPP_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  });
+    // Enviar a Google WebApp
+    await fetch(GOOGLE_WEBAPP_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
 
-  // WhatsApp Automático
-  const telefonos = {
-    "Lic. Christian": "59167413716",
-    "Mgr. Sandra": "59167439286",
-    "Lic. Fernando": "59162690019"
-  };
+    // WhatsApp Automático
+    const telefonos = {
+      "Lic. Christian": "59167413716",
+      "Mgr. Sandra": "59167439286",
+      "Lic. Fernando": "59162690019"
+    };
 
-  const celular = telefonos[data.profesional];
-  const mensaje =
-    `🔔 Nueva Reserva%0A👤 ${data.nombre}%0A⚧️ ${data.sexo}%0A🎂 ${data.edad} años%0A🏙️ ${data.ciudad}%0A📅 ${data.fecha}%0A⏰ ${data.hora}%0A💻 ${data.modalidad}%0A📝 ${data.motivoConsulta}`;
+    const celular = telefonos[data.profesional];
+    const mensaje = `🔔 Nueva Reserva%0A👤 ${data.nombre}%0A⚧️ ${data.sexo}%0A🎂 ${data.edad} años%0A🏙️ ${data.ciudad}%0A📅 ${data.fecha}%0A⏰ ${data.hora}%0A💻 ${data.modalidad}%0A📝 ${data.motivoConsulta}`;
 
-  fetch(`https://api.callmebot.com/whatsapp.php?phone=${celular}&text=${mensaje}&apikey=348275`);
+    fetch(`https://api.callmebot.com/whatsapp.php?phone=${celular}&text=${mensaje}&apikey=348275`);
 
-  // EmailJS
-  const correos = {
-    "Lic. Christian": "guentokhrjss@gmail.com",
-    "Mgr. Sandra": "babayaga352@gmail.com",
-    "Lic. Fernando": "delatorre.cortes.fernando@gmail.com"
-  };
+    // EmailJS
+    const correos = {
+      "Lic. Christian": "guentokhrjss@gmail.com",
+      "Mgr. Sandra": "babayaga352@gmail.com",
+      "Lic. Fernando": "delatorre.cortes.fernando@gmail.com"
+    };
 
-  emailjs.send("service_bj6yafl", "template_k35sy5s", {
-    nombre: data.nombre,
-    sexo: data.sexo,
-    edad: data.edad,
-    ciudad: data.ciudad,
-    telefono: data.telefono,
-    profesional: data.profesional,
-    modalidad: data.modalidad,
-    motivoConsulta: data.motivoConsulta,
-    fecha: data.fecha,
-    hora: data.hora,
-    correo_destino: correos[data.profesional],
-    copia: "fundacion.plenitud.bo@gmail.com"
-  });
+    emailjs.send("service_bj6yafl", "template_k35sy5s", {
+      nombre: data.nombre,
+      sexo: data.sexo,
+      edad: data.edad,
+      ciudad: data.ciudad,
+      telefono: data.telefono,
+      profesional: data.profesional,
+      modalidad: data.modalidad,
+      motivoConsulta: data.motivoConsulta,
+      fecha: data.fecha,
+      hora: data.hora,
+      correo_destino: correos[data.profesional],
+      copia: "fundacion.plenitud.bo@gmail.com"
+    });
 
-  document.getElementById("respuesta").innerHTML =
-    "Reserva enviada correctamente. Le confirmaremos por WhatsApp.";
-  document.getElementById("reservaForm").reset();
-  document.getElementById("infoModalidad").style.display = "none";
+    document.getElementById("respuesta").innerHTML = "Reserva enviada correctamente. Le confirmaremos por WhatsApp.";
+    document.getElementById("reservaForm").reset();
+    document.getElementById("infoModalidad").style.display = "none";
+    document.getElementById("campoEstudiante").style.display = "none";
+
+  } catch (error) {
+    console.error('Error al enviar el formulario:', error);
+    document.getElementById("respuesta").innerHTML = "Error al enviar la reserva. Intente nuevamente.";
+    document.getElementById("respuesta").style.color = "red";
+  }
 });
 </script>
 
