@@ -227,8 +227,8 @@
 <script>
 // ========== CONFIGURACIÓN ==========
 const ADMIN_EMAILS = [
-    "delatorre.cortes.fernando@gmail.com",
     "fundacion.plenitud.bo@gmail.com", 
+   "delatorre.cortes.fernando@gmail.com",
     "babayaga352@gmail.com",
     "guentokhrjss@gmail.com"
 ];
@@ -415,7 +415,7 @@ async function uploadToDrive() {
     }
 }
 
-async function uploadFileToDrive(file, folderName = 'Fundacion-Plenitud') {
+async function uploadFileToDrive(file, folderName = 'Fundacion-Plenitud-Archivos') {
     const folderId = await findOrCreateFolder(folderName);
     
     const metadata = {
