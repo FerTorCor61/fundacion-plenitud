@@ -14,7 +14,7 @@
 </script>
 
 <style>
-/* ---------- Estilos Base ---------- */
+/* ---------- Estilos Base (Mantenidos de tu versión original) ---------- */
 body { font-family: Arial, sans-serif; background: #f2f4f8; margin:0; color:#222; line-height: 1.4; }
 a { color: #1A4B84; text-decoration: none; }
 
@@ -31,7 +31,7 @@ a { color: #1A4B84; text-decoration: none; }
 /* Page container */
 .container-main { max-width:1100px; margin:22px auto; padding:0 18px; }
 
-/* Form card (Dos columnas) */
+/* Form card */
 .form-card {
   background:#fff; border-radius:12px; padding:22px; box-shadow:0 8px 28px rgba(20,40,80,0.06);
   display:flex; gap:24px; flex-wrap:wrap;
@@ -79,7 +79,7 @@ textarea { min-height:92px; resize:vertical; }
 <header class="site-header">
   <div class="container">
     <div class="logo">
-      <img src="images/logo.png" alt="Fundación Plenitud logo" onerror="this.src='https://via.placeholder.com/150x56?text=LOGO+PLENITUD'">
+      <img src="images/logo.png" alt="Fundación Plenitud logo">
     </div>
 
     <nav class="main-nav">
@@ -107,12 +107,12 @@ textarea { min-height:92px; resize:vertical; }
 
         <div class="form-group">
           <label id="labelNombre" for="nombre">Nombre completo:</label>
-          <input id="nombre" type="text" placeholder="Nombre y Apellidos" required>
+          <input id="nombre" name="nombre" type="text" placeholder="Nombre y Apellidos" required>
         </div>
 
         <div class="form-group">
           <label for="tipoPaciente">Tipo de paciente:</label>
-          <select id="tipoPaciente" required>
+          <select id="tipoPaciente" name="tipoPaciente" required>
             <option value="">Seleccione…</option>
             <option value="normal">Paciente Particular</option>
             <option value="estudiante">Estudiante Fundación</option>
@@ -121,7 +121,7 @@ textarea { min-height:92px; resize:vertical; }
 
         <div class="form-group">
           <label for="sexo">Sexo:</label>
-          <select id="sexo" required>
+          <select id="sexo" name="sexo" required>
             <option value="">Seleccione…</option>
             <option>Hombre</option>
             <option>Mujer</option>
@@ -131,22 +131,23 @@ textarea { min-height:92px; resize:vertical; }
 
         <div class="form-group">
           <label for="edad">Edad:</label>
-          <input id="edad" type="number" min="1" max="120" placeholder="Ingrese su edad" required>
+          <input id="edad" name="edad" type="number" min="1" max="120" placeholder="Ingrese su edad" required>
         </div>
 
         <div class="form-group">
           <label for="paisSelect">País desde donde nos escribe:</label>
-          <select id="paisSelect" required>
+          <select id="paisSelect" name="pais" required>
             <option value="">Seleccione…</option>
             <option value="Bolivia">Bolivia</option>
             <option value="Otro">Otro país</option>
           </select>
         </div>
 
+        <!-- Campos ocultos/dinámicos -->
         <div id="boliviaFields" style="display:none;">
           <div class="form-group">
             <label for="departamento">Departamento:</label>
-            <select id="departamento">
+            <select id="departamento" name="departamento">
               <option value="">Seleccione…</option>
               <option value="Cochabamba">Cochabamba</option>
               <option value="La Paz">La Paz</option>
@@ -162,7 +163,7 @@ textarea { min-height:92px; resize:vertical; }
 
           <div class="form-group" id="ciudadField" style="display:none;">
             <label for="ciudad">Ciudad:</label>
-            <input id="ciudad" type="text" placeholder="Ej: Cercado">
+            <input id="ciudad" name="ciudad" type="text" placeholder="Ej: Cercado">
             <span class="small">Nota: Modalidad presencial solo disponible en Cercado, Cochabamba.</span>
           </div>
         </div>
@@ -170,23 +171,23 @@ textarea { min-height:92px; resize:vertical; }
         <div id="otroPaisField" style="display:none;">
           <div class="form-group">
             <label for="paisLibre">Especifique País:</label>
-            <input id="paisLibre" type="text" placeholder="Ej: España">
+            <input id="paisLibre" name="paisLibre" type="text" placeholder="Ej: España">
           </div>
         </div>
 
         <div class="form-group">
           <label for="telefono">WhatsApp del paciente:</label>
-          <input id="telefono" type="text" placeholder="+591 7XXXXXXX" required>
+          <input id="telefono" name="telefono" type="text" placeholder="+591 7XXXXXXX" required>
         </div>
 
         <div class="form-group">
           <label for="motivoConsulta">Motivo de consulta:</label>
-          <textarea id="motivoConsulta" placeholder="Describa brevemente el motivo" required></textarea>
+          <textarea id="motivoConsulta" name="motivoConsulta" placeholder="Describa brevemente el motivo" required></textarea>
         </div>
 
         <div class="form-group">
           <label for="profesional">Profesional:</label>
-          <select id="profesional" required>
+          <select id="profesional" name="profesional" required>
             <option value="">Seleccione…</option>
             <option value="Lic. Christian">Lic. Christian Claure T.</option>
             <option value="Mgr. Sandra">Mgr. Sandra Aranda B.</option>
@@ -196,7 +197,7 @@ textarea { min-height:92px; resize:vertical; }
 
         <div class="form-group">
           <label for="modalidad">Modalidad de consulta:</label>
-          <select id="modalidad" required>
+          <select id="modalidad" name="modalidad" required>
             <option value="">Seleccione…</option>
             <option value="Presencial">Presencial</option>
             <option value="Virtual">Virtual</option>
@@ -209,12 +210,12 @@ textarea { min-height:92px; resize:vertical; }
 
         <div class="form-group">
           <label for="fecha">Fecha:</label>
-          <input id="fecha" type="date" required>
+          <input id="fecha" name="fecha" type="date" required>
         </div>
 
         <div class="form-group">
           <label for="hora">Hora:</label>
-          <select id="hora" required>
+          <select id="hora" name="hora" required>
             <option value="">Seleccione…</option>
             <option value="09:00">09:00 AM</option>
             <option value="10:00">10:00 AM</option>
@@ -234,7 +235,7 @@ textarea { min-height:92px; resize:vertical; }
 
         <div class="form-group">
           <label for="comprobante">Subir comprobante (Imagen):</label>
-          <input id="comprobante" type="file" accept="image/*" required>
+          <input id="comprobante" name="comprobante" type="file" accept="image/*" required>
         </div>
 
         <div style="display:flex; align-items:flex-start; gap:10px; margin: 15px 0;">
@@ -270,21 +271,21 @@ textarea { min-height:92px; resize:vertical; }
 
 <!-- ========== FOOTER ========== -->
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-logos">
-      <img src="images/umss.png" alt="UMSS" onerror="this.src='https://via.placeholder.com/100x50?text=UMSS'">
-      <img src="images/ColePsico.png" alt="Colegio de Psicólogos" onerror="this.src='https://via.placeholder.com/100x50?text=ColePsico'">
-      <img src="images/humanidades.jpg" alt="Humanidades" onerror="this.src='https://via.placeholder.com/100x50?text=Humanidades'">
-      <img src="images/posgrado.jpg" alt="Posgrado" onerror="this.src='https://via.placeholder.com/100x50?text=Posgrado'">
-    </div>
+  <div class="container">
+    <div class="footer-logos">
+      <img src="images/umss.png" alt="UMSS" onerror="this.src='https://via.placeholder.com/100x50?text=UMSS'">
+      <img src="images/ColePsico.png" alt="Colegio de Psicólogos" onerror="this.src='https://via.placeholder.com/100x50?text=ColePsico'">
+      <img src="images/humanidades.jpg" alt="Humanidades" onerror="this.src='https://via.placeholder.com/100x50?text=Humanidades'">
+      <img src="images/posgrado.jpg" alt="Posgrado" onerror="this.src='https://via.placeholder.com/100x50?text=Posgrado'">
+    </div>
 
-    <div class="contact-info">
-      <p><b>WhatsApp:</b> (+591) 674-13-716 | (+591) 674-39-286</p>
-      <p><b>Correo:</b> <a href="mailto:fundacion.plenitud.bo@gmail.com">fundacion.plenitud.bo@gmail.com</a></p>
-      <p><b>NIT:</b> 382663023 | Decreto Departamental N° 3973</p>
-      <p>&copy; 2025 Fundación Plenitud. Cochabamba, Bolivia.</p>
-    </div>
-  </div>
+    <div class="contact-info">
+      <p><b>WhatsApp:</b> (+591) 674-13-716 | (+591) 674-39-286</p>
+      <p><b>Correo:</b> <a href="mailto:fundacion.plenitud.bo@gmail.com">fundacion.plenitud.bo@gmail.com</a></p>
+      <p><b>NIT:</b> 382663023 | Decreto Departamental N° 3973</p>
+      <p>&copy; 2025 Fundación Plenitud. Cochabamba, Bolivia.</p>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -296,7 +297,6 @@ const boliviaFields = document.getElementById("boliviaFields");
 const otroPaisField = document.getElementById("otroPaisField");
 const departamento = document.getElementById("departamento");
 const ciudadField = document.getElementById("ciudadField");
-const ciudad = document.getElementById("ciudad");
 const modalidad = document.getElementById("modalidad");
 const infoModalidad = document.getElementById("infoModalidad");
 const textoModalidad = document.getElementById("textoModalidad");
@@ -307,124 +307,148 @@ const btnSubmit = document.getElementById("btnSubmit");
 const respuesta = document.getElementById("respuesta");
 const reservaForm = document.getElementById("reservaForm");
 
-// Lógica país
+// 1. Lógica País
 paisSelect.addEventListener("change", () => {
-  if (paisSelect.value === "Bolivia") {
-    boliviaFields.style.display = "block";
-    otroPaisField.style.display = "none";
-    modalidad.querySelector("option[value='Presencial']").disabled = false;
-  } else if (paisSelect.value === "Otro") {
-    boliviaFields.style.display = "none";
-    otroPaisField.style.display = "block";
-    modalidad.value = "Virtual";
-    modalidad.querySelector("option[value='Presencial']").disabled = true;
-    infoModalidad.style.display = "block";
-    textoModalidad.textContent = "Nota: Para pacientes internacionales, las consultas son exclusivamente virtuales.";
-  }
+  if (paisSelect.value === "Bolivia") {
+    boliviaFields.style.display = "block";
+    otroPaisField.style.display = "none";
+    modalidad.querySelector("option[value='Presencial']").disabled = false;
+  } else if (paisSelect.value === "Otro") {
+    boliviaFields.style.display = "none";
+    otroPaisField.style.display = "block";
+    modalidad.value = "Virtual";
+    modalidad.querySelector("option[value='Presencial']").disabled = true;
+    infoModalidad.style.display = "block";
+    textoModalidad.textContent = "Nota: Para pacientes internacionales, las consultas son exclusivamente virtuales.";
+  } else {
+    boliviaFields.style.display = "none";
+    otroPaisField.style.display = "none";
+  }
 });
 
-// Lógica departamento
+// 2. Lógica Departamento
 departamento.addEventListener("change", () => {
-  if (departamento.value === "Cochabamba") {
-    ciudadField.style.display = "block";
-    modalidad.querySelector("option[value='Presencial']").disabled = false;
-    infoModalidad.style.display = "none";
-  } else {
-    ciudadField.style.display = "none";
-    modalidad.value = "Virtual";
-    modalidad.querySelector("option[value='Presencial']").disabled = true;
-    infoModalidad.style.display = "block";
-    textoModalidad.textContent = "Las sesiones presenciales solo están disponibles en la ciudad de Cochabamba.";
-  }
+  if (departamento.value === "Cochabamba") {
+    ciudadField.style.display = "block";
+    modalidad.querySelector("option[value='Presencial']").disabled = false;
+    infoModalidad.style.display = "none";
+  } else {
+    ciudadField.style.display = "none";
+    modalidad.value = "Virtual";
+    modalidad.querySelector("option[value='Presencial']").disabled = true;
+    infoModalidad.style.display = "block";
+    textoModalidad.textContent = "Las sesiones presenciales solo están disponibles en la ciudad de Cochabamba.";
+  }
 });
 
-// Lógica tipo de paciente: CAMBIA EL TEXTO DEL NOMBRE
+// 3. Lógica Tipo de Paciente (Costo y Nombre)
 tipoPaciente.addEventListener("change", () => {
-  if (tipoPaciente.value === "estudiante") {
-    labelNombre.textContent = "Nombre completo del Estudiante:";
-    labelNombre.style.color = "#1A4B84";
-    costoTexto.textContent = "Estudiante Fundación: 90 Bs por sesión";
-  } else {
-    labelNombre.textContent = "Nombre completo:";
-    labelNombre.style.color = "#2b3b56";
-    costoTexto.textContent = "Primera sesión: 250 Bs | Siguientes: 150 Bs";
-  }
+  if (tipoPaciente.value === "estudiante") {
+    labelNombre.textContent = "Nombre completo del Estudiante:";
+    labelNombre.style.color = "#1A4B84";
+    costoTexto.textContent = "Estudiante Fundación: 90 Bs por sesión";
+  } else {
+    labelNombre.textContent = "Nombre completo:";
+    labelNombre.style.color = "#2b3b56";
+    costoTexto.textContent = "Primera sesión: 250 Bs | Siguientes: 150 Bs";
+  }
 });
 
-// Procesamiento de Envío
+// 4. Función Auxiliar: File to Base64
 async function fileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-    reader.readAsDataURL(file);
-  });
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+    reader.readAsDataURL(file);
+  });
 }
 
+// 5. Envío del Formulario
 reservaForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  
-  btnSubmit.disabled = true;
-  btnSubmit.textContent = "Enviando reserva...";
-  respuesta.textContent = "";
+  e.preventDefault();
+  
+  btnSubmit.disabled = true;
+  btnSubmit.textContent = "Enviando reserva...";
+  respuesta.textContent = "";
+  respuesta.style.color = "#333";
 
-  const fileInput = document.getElementById("comprobante");
-  const file = fileInput.files[0];
+  const fileInput = document.getElementById("comprobante");
+  const file = fileInput.files[0];
 
-  try {
-    const base64Img = await fileToBase64(file);
-    
-    const payload = {
-      action: "reserva",
-      nombre: document.getElementById("nombre").value,
-      sexo: document.getElementById("sexo").value,
-      edad: document.getElementById("edad").value,
-      pais: paisSelect.value === "Bolivia" ? "Bolivia" : document.getElementById("paisLibre").value,
-      departamento: departamento.value,
-      ciudad: ciudad.value,
-      telefono: document.getElementById("telefono").value,
-      tipoPaciente: tipoPaciente.value === "estudiante" ? "Estudiante Fundación" : "Particular",
-      motivo: document.getElementById("motivoConsulta").value,
-      profesional: document.getElementById("profesional").value,
-      modalidad: modalidad.value,
-      fecha: document.getElementById("fecha").value,
-      hora: document.getElementById("hora").value,
-      comprobante: base64Img
+  try {
+    // Convertir imagen
+    const base64Img = await fileToBase64(file);
+    
+    // Construir payload
+    const payload = {
+      action: "reserva",
+      nombre: document.getElementById("nombre").value,
+      sexo: document.getElementById("sexo").value,
+      edad: document.getElementById("edad").value,
+      pais: paisSelect.value === "Bolivia" ? "Bolivia" : (document.getElementById("paisLibre")?.value || "Otro"),
+      departamento: departamento.value,
+      ciudad: document.getElementById("ciudad").value,
+      telefono: document.getElementById("telefono").value,
+      tipoPaciente: tipoPaciente.value === "estudiante" ? "Estudiante Fundación" : "Particular",
+      motivo: document.getElementById("motivoConsulta").value,
+      profesional: document.getElementById("profesional").value,
+      modalidad: modalidad.value,
+      fecha: document.getElementById("fecha").value,
+      hora: document.getElementById("hora").value,
+      comprobante: base64Img // Se envía el archivo codificado
+    };
+
+    // A. Enviar a Google Apps Script (Sheets)
+    // Usamos no-cors para evitar el error de bloqueo, aunque no podamos leer la respuesta JSON
+    await fetch(GOOGLE_WEBAPP_URL, {
+      method: "POST",
+      mode: "no-cors", 
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    // B. Enviar a EmailJS (Respaldo correo)
+    const emails = { 
+        "Lic. Christian": "guentokhrjss@gmail.com", 
+        "Mgr. Sandra": "babayaga352@gmail.com", 
+        "Lic. Fernando": "delatorre.cortes.fernando@gmail.com" 
     };
+    
+    emailjs.send("service_bj6yafl", "template_k35sy5s", {
+      ...payload,
+      correo_destino: emails[payload.profesional] || "fundacion.plenitud.bo@gmail.com"
+    });
+    
+    // C. Abrir WhatsApp (Confirmación final)
+    const phones = { 
+        "Lic. Christian": "59167413716", 
+        "Mgr. Sandra": "59167439286", 
+        "Lic. Fernando": "59162690019" 
+    };
+    const target = phones[payload.profesional] || "59167413716";
+    const msg = `🔔 *Nueva Reserva*%0A👤 *Paciente:* ${payload.nombre}%0A🏷️ *Tipo:* ${payload.tipoPaciente}%0A📅 *Fecha:* ${payload.fecha}%0A⏰ *Hora:* ${payload.hora}%0A💻 *Mod:* ${payload.modalidad}`;
+    
+    // Éxito visual
+    respuesta.style.color = "green";
+    respuesta.textContent = "✅ ¡Datos enviados! Se abrirá WhatsApp para confirmar.";
+    
+    // Redirigir a WhatsApp en 1.5 seg
+    setTimeout(() => {
+        window.open(`https://wa.me/${target}?text=${msg}`, '_blank');
+        reservaForm.reset();
+        labelNombre.textContent = "Nombre completo:"; 
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = "Enviar Reserva";
+    }, 1500);
 
-    // 1. Envío a Google Sheets
-    await fetch(GOOGLE_WEBAPP_URL, {
-      method: "POST",
-      mode: "no-cors",
-      body: JSON.stringify(payload)
-    });
-
-    // 2. WhatsApp
-    const phones = { "Lic. Christian": "59167413716", "Mgr. Sandra": "59167439286", "Lic. Fernando": "59162690019" };
-    const target = phones[payload.profesional] || "59167413716";
-    const msg = `🔔 *Nueva Reserva*%0A👤 *Paciente:* ${payload.nombre}%0A🏷️ *Tipo:* ${payload.tipoPaciente}%0A📅 *Fecha:* ${payload.fecha}%0A⏰ *Hora:* ${payload.hora}%0A💻 *Mod:* ${payload.modalidad}`;
-    fetch(`https://api.callmebot.com/whatsapp.php?phone=${target}&text=${msg}&apikey=348275`);
-
-    // 3. EmailJS
-    const emails = { "Lic. Christian": "guentokhrjss@gmail.com", "Mgr. Sandra": "babayaga352@gmail.com", "Lic. Fernando": "delatorre.cortes.fernando@gmail.com" };
-    await emailjs.send("service_bj6yafl", "template_k35sy5s", {
-      ...payload,
-      correo_destino: emails[payload.profesional]
-    });
-
-    respuesta.style.color = "green";
-    respuesta.textContent = "✅ ¡Tu reserva ha sido enviada con éxito! Te contactaremos pronto.";
-    reservaForm.reset();
-    labelNombre.textContent = "Nombre completo:"; // Reset label
-
-  } catch (err) {
-    console.error(err);
-    respuesta.style.color = "red";
-    respuesta.textContent = "❌ Error al enviar. Intenta nuevamente.";
-  } finally {
+  } catch (err) {
+    console.error("Error en el proceso:", err);
+    respuesta.style.color = "red";
+    respuesta.textContent = "❌ Error al enviar. Por favor, revisa tu conexión.";
     btnSubmit.disabled = false;
     btnSubmit.textContent = "Enviar Reserva";
-  }
+  } 
 });
 </script>
 
