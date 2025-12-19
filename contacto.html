@@ -14,8 +14,8 @@
 </script>
 
 <style>
-/* ---------- Estilos Base (Mantenidos de tu versión original) ---------- */
-body { font-family: Arial, sans-serif; background: #f2f4f8; margin:0; color:#222; line-height: 1.4; }
+/* ---------- Estilos Base ---------- */
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f2f4f8; margin:0; color:#222; line-height: 1.4; }
 a { color: #1A4B84; text-decoration: none; }
 
 .site-header { background: white; border-bottom: 1px solid #e6eefb; }
@@ -36,36 +36,55 @@ a { color: #1A4B84; text-decoration: none; }
 .form-right { flex: 0 0 320px; min-width:260px; }
 
 .form-group { margin-bottom:12px; }
-label { display:block; margin-bottom:6px; font-weight:700; color:#2b3b56; transition: all 0.3s ease; }
-input[type="text"], input[type="number"], input[type="date"], select, textarea {
+label { display:block; margin-bottom:6px; font-weight:700; color:#2b3b56; }
+input, select, textarea {
   width:100%; padding:10px 12px; border-radius:8px; border:1px solid #d7e2f8; font-size:15px; box-sizing:border-box;
   background:#fbfdff;
 }
 textarea { min-height:92px; resize:vertical; }
 
-.small { font-size:13px; color:#556; margin-top:6px; display:block; }
-
-.submit-btn { width:100%; padding:12px 14px; border-radius:10px; border:none; background:#1A4B84; color:#fff; font-size:16px; cursor:pointer; font-weight: bold; }
+.submit-btn { width:100%; padding:14px; border-radius:10px; border:none; background:#1A4B84; color:#fff; font-size:16px; cursor:pointer; font-weight: bold; transition: background 0.3s; }
 .submit-btn:hover { background:#163d6b; }
 .submit-btn:disabled { background: #a0aec0; cursor: not-allowed; }
 
-.site-footer { background:#fff; margin-top:24px; border-top:1px solid #eee; }
-.site-footer .container { max-width:1100px; margin:0 auto; padding:24px 18px; display:flex; gap:30px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;}
-.footer-logos img { margin:8px; max-height:75px; object-fit:contain; }
-.contact-info p { margin:6px 0; color:#333; font-size: 14px; }
+/* Modal de Éxito Mejorado */
+#successModal {
+  display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center;
+}
+.modal-content {
+  background: white; padding: 30px; border-radius: 20px; text-align: center; max-width: 420px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3); margin: 20px; animation: slideUp 0.3s ease-out;
+}
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-.modalidad-info { background:#fff3cd; color:#856404; padding:10px; border-radius:8px; margin-bottom:12px; border:1px solid #ffeeba; font-size:14px; }
+.modal-content h2 { color: #28a745; margin-top: 0; }
+.modal-content p { font-size: 16px; color: #444; line-height: 1.5; margin-bottom: 20px; }
+.close-modal-btn { background: #1A4B84; color: white; padding: 12px 25px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; width: 100%; }
+
+.site-footer { background:#fff; margin-top:24px; border-top:1px solid #eee; }
+.site-footer .container { max-width:1100px; margin:0 auto; padding:24px 18px; display:flex; gap:30px; justify-content:space-between; flex-wrap:wrap;}
+.footer-logos img { margin:8px; max-height:60px; object-fit:contain; }
 
 @media (max-width:800px){
   .form-card { flex-direction:column; }
-  .form-right { order:2; width:100%; }
-  .form-left { order:1; width:100%; }
   .main-nav { display:none; }
 }
 </style>
 </head>
 
 <body>
+
+<!-- Modal de Éxito -->
+<div id="successModal">
+  <div class="modal-content">
+    <div style="font-size: 50px; margin-bottom: 10px;">✅</div>
+    <h2>Reserva cumplida</h2>
+    <p>Su cita ha sido registrada con éxito.<br><b>No olvide llegar 10 minutos antes para evitar molestias.</b></p>
+    <p style="font-size: 14px; color: #666;">Se ha enviado la notificación al profesional con sus datos.</p>
+    <button class="close-modal-btn" onclick="location.reload()">Cerrar y Volver al Inicio</button>
+  </div>
+</div>
 
 <header class="site-header">
   <div class="container">
@@ -85,14 +104,14 @@ textarea { min-height:92px; resize:vertical; }
 
 <main class="container-main">
   <h1 style="color:#1A4B84; margin-bottom:6px;">Reserva tu Cita</h1>
-  <p style="margin-top:0; color:#556;">Horario de atención: Lun-Vie 09:00-12:00 | 15:00-18:00</p>
+  <p style="margin-top:0; color:#556;">Complete sus datos para agendar una sesión profesional.</p>
 
   <div class="form-card">
     <div class="form-left">
       <form id="reservaForm">
         <div class="form-group">
-          <label id="labelNombre" for="nombre">Nombre completo:</label>
-          <input id="nombre" name="nombre" type="text" placeholder="Nombre y Apellidos" required>
+          <label id="labelNombre" for="nombre">Nombre completo del Paciente:</label>
+          <input id="nombre" name="nombre" type="text" placeholder="Ej: Juan Pérez" required>
         </div>
 
         <div class="form-group">
@@ -104,23 +123,24 @@ textarea { min-height:92px; resize:vertical; }
           </select>
         </div>
 
-        <div class="form-group">
-          <label for="sexo">Sexo:</label>
-          <select id="sexo" name="sexo" required>
-            <option value="">Seleccione…</option>
-            <option>Hombre</option>
-            <option>Mujer</option>
-            <option>Otros</option>
-          </select>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="form-group">
+                <label for="sexo">Sexo:</label>
+                <select id="sexo" name="sexo" required>
+                    <option value="">Seleccione…</option>
+                    <option>Hombre</option>
+                    <option>Mujer</option>
+                    <option>Otros</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="edad">Edad:</label>
+                <input id="edad" name="edad" type="number" min="1" max="120" placeholder="Edad" required>
+            </div>
         </div>
 
         <div class="form-group">
-          <label for="edad">Edad:</label>
-          <input id="edad" name="edad" type="number" min="1" max="120" placeholder="Ingrese su edad" required>
-        </div>
-
-        <div class="form-group">
-          <label for="paisSelect">País desde donde nos escribe:</label>
+          <label for="paisSelect">País de residencia:</label>
           <select id="paisSelect" name="pais" required>
             <option value="">Seleccione…</option>
             <option value="Bolivia">Bolivia</option>
@@ -145,31 +165,31 @@ textarea { min-height:92px; resize:vertical; }
             </select>
           </div>
           <div class="form-group" id="ciudadField" style="display:none;">
-            <label for="ciudad">Ciudad:</label>
+            <label for="ciudad">Ciudad/Municipio:</label>
             <input id="ciudad" name="ciudad" type="text" placeholder="Ej: Cercado">
-            <span class="small">Nota: Modalidad presencial solo disponible en Cercado, Cochabamba.</span>
           </div>
         </div>
 
         <div id="otroPaisField" style="display:none;">
           <div class="form-group">
             <label for="paisLibre">Especifique País:</label>
-            <input id="paisLibre" name="paisLibre" type="text" placeholder="Ej: España">
+            <input id="paisLibre" name="paisLibre" type="text" placeholder="Ej: México">
           </div>
         </div>
 
         <div class="form-group">
-          <label for="telefono">WhatsApp del paciente:</label>
+          <label for="telefono">WhatsApp del Paciente (con código de país):</label>
           <input id="telefono" name="telefono" type="text" placeholder="+591 7XXXXXXX" required>
+          <span style="font-size: 11px; color: #666;">Este número se usará para enviarle su recordatorio.</span>
         </div>
 
         <div class="form-group">
           <label for="motivoConsulta">Motivo de consulta:</label>
-          <textarea id="motivoConsulta" name="motivoConsulta" placeholder="Describa brevemente el motivo" required></textarea>
+          <textarea id="motivoConsulta" name="motivoConsulta" placeholder="¿Cuál es el motivo de su visita?" required></textarea>
         </div>
 
         <div class="form-group">
-          <label for="profesional">Profesional:</label>
+          <label for="profesional">Profesional a cargo:</label>
           <select id="profesional" name="profesional" required>
             <option value="">Seleccione…</option>
             <option value="Lic. Christian">Lic. Christian Claure T.</option>
@@ -179,231 +199,165 @@ textarea { min-height:92px; resize:vertical; }
         </div>
 
         <div class="form-group">
-          <label for="modalidad">Modalidad de consulta:</label>
+          <label for="modalidad">Modalidad:</label>
           <select id="modalidad" name="modalidad" required>
             <option value="">Seleccione…</option>
-            <option value="Presencial">Presencial</option>
-            <option value="Virtual">Virtual</option>
+            <option value="Presencial">Presencial (En Clínica)</option>
+            <option value="Virtual">Virtual (Zoom/WhatsApp)</option>
           </select>
         </div>
 
-        <div id="infoModalidad" class="modalidad-info" style="display:none;">
-          <p id="textoModalidad" style="margin:0;"></p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input id="fecha" name="fecha" type="date" required>
+            </div>
+            <div class="form-group">
+                <label for="hora">Hora:</label>
+                <select id="hora" name="hora" required>
+                    <option value="">Seleccione…</option>
+                    <option value="09:00">09:00 AM</option>
+                    <option value="10:00">10:00 AM</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="15:00">03:00 PM</option>
+                    <option value="16:00">04:00 PM</option>
+                    <option value="17:00">05:00 PM</option>
+                    <option value="18:00">06:00 PM</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="margin: 20px 0; padding: 12px; border-radius: 8px; background: #f0f7ff; border-left: 5px solid #1A4B84;">
+          <p id="costoTexto" style="margin:0; font-weight: bold; color: #1A4B84;">Primera sesión: 250 Bs | Siguientes: 150 Bs</p>
         </div>
 
         <div class="form-group">
-          <label for="fecha">Fecha:</label>
-          <input id="fecha" name="fecha" type="date" required>
-        </div>
-
-        <div class="form-group">
-          <label for="hora">Hora:</label>
-          <select id="hora" name="hora" required>
-            <option value="">Seleccione…</option>
-            <option value="09:00">09:00 AM</option>
-            <option value="10:00">10:00 AM</option>
-            <option value="11:00">11:00 AM</option>
-            <option value="12:00">12:00 PM</option>
-            <option value="15:00">03:00 PM</option>
-            <option value="16:00">04:00 PM</option>
-            <option value="17:00">05:00 PM</option>
-            <option value="18:00">06:00 PM</option>
-          </select>
-        </div>
-
-        <div style="margin: 20px 0; padding: 10px; border-left: 4px solid #1A4B84; background: #f9f9f9;">
-          <h3 style="margin:0; font-size: 16px; color: #1A4B84;">Inversión de la sesión</h3>
-          <p id="costoTexto" style="margin:5px 0; font-weight: bold;">Primera sesión: 250 Bs | Siguientes: 150 Bs</p>
-        </div>
-
-        <div class="form-group">
-          <label for="comprobante">Subir comprobante (Imagen):</label>
+          <label for="comprobante">Subir Comprobante de Pago (Imagen):</label>
           <input id="comprobante" name="comprobante" type="file" accept="image/*" required>
         </div>
 
         <div style="display:flex; align-items:flex-start; gap:10px; margin: 15px 0;">
-          <input id="confirmarPago" type="checkbox" required style="margin-top:4px;">
-          <label for="confirmarPago" style="font-weight:normal; font-size:14px; cursor:pointer;">Confirmo que realicé el pago mediante QR y acepto los términos de reserva.</label>
+          <input id="confirmarPago" type="checkbox" required>
+          <label for="confirmarPago" style="font-weight:normal; font-size:13px; cursor:pointer;">He realizado el pago correspondiente y acepto las políticas de cancelación.</label>
         </div>
 
-        <button type="submit" id="btnSubmit" class="submit-btn">Enviar Reserva</button>
-        <p id="respuesta" style="margin-top:12px; font-weight:700; text-align:center;"></p>
+        <button type="submit" id="btnSubmit" class="submit-btn">Finalizar y Reservar Cita</button>
+        <p id="respuesta" style="margin-top:12px; font-weight:bold; text-align:center; color: #1A4B84;"></p>
       </form>
     </div>
 
     <aside class="form-right">
-      <div style="margin-bottom:24px;">
-        <h3 style="margin:0 0 8px 0; color:#234dcc;">Confirmación de pago</h3>
-        <p class="small">Escanee el QR y suba su comprobante. Después recibirá confirmación por WhatsApp.</p>
-        <img src="images/QR.png" alt="QR de pago" onerror="this.src='https://via.placeholder.com/300x300?text=QR+PAGO'" style="width:100%; border-radius:10px; box-shadow:0 6px 18px rgba(30,60,120,0.06); border: 1px solid #eee;">
-      </div>
-      <div style="margin-top:10px; padding: 15px; background: #fbfdff; border-radius: 10px; border: 1px solid #eef3fb;">
-        <h3 style="margin:0 0 8px 0; color:#234dcc;">Contacto</h3>
-        <p class="small"><b>WhatsApp:</b> (+591) 674-13-716</p>
-        <p class="small"><b>WhatsApp:</b> (+591) 674-39-286</p>
-        <p class="small"><b>Teléfono:</b> (+591 - 4) 428-40-25</p>
+      <div style="position: sticky; top: 20px;">
+        <h3 style="margin:0 0 10px 0; color:#1A4B84;">Pago mediante QR</h3>
+        <p style="font-size: 13px; color: #666; margin-bottom: 15px;">Por favor, realice el pago antes de enviar el formulario.</p>
+        <img src="images/QR.png" alt="QR Fundación Plenitud" onerror="this.src='https://via.placeholder.com/300x350?text=QR+PAGO+FUNDACION'" style="width:100%; border-radius:12px; border: 1px solid #ddd; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+        <div style="margin-top: 15px; font-size: 12px; color: #555; background: #fff; padding: 10px; border-radius: 8px; border: 1px dashed #ccc;">
+            <strong>Nota:</strong> Una vez enviado el formulario, se le redirigirá a WhatsApp para notificar a su terapeuta.
+        </div>
       </div>
     </aside>
   </div>
 </main>
 
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-logos">
-      <img src="images/umss.png" alt="UMSS" onerror="this.src='https://via.placeholder.com/100x50?text=UMSS'">
-      <img src="images/ColePsico.png" alt="Colegio de Psicólogos" onerror="this.src='https://via.placeholder.com/100x50?text=ColePsico'">
-    </div>
-    <div class="contact-info">
-      <p><b>WhatsApp:</b> (+591) 674-13-716 | (+591) 674-39-286</p>
-      <p>&copy; 2025 Fundación Plenitud. Cochabamba, Bolivia.</p>
-    </div>
-  </div>
-</footer>
-
 <script>
 const GOOGLE_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxWarny1isBIGx-HnFArOsbZ-rFuId45TDLFLKGKYdwv8QqNXg_uFUyRHc92soNjWVHHQ/exec";
 
-// Referencias DOM
-const paisSelect = document.getElementById("paisSelect");
-const boliviaFields = document.getElementById("boliviaFields");
-const otroPaisField = document.getElementById("otroPaisField");
-const departamento = document.getElementById("departamento");
-const ciudadField = document.getElementById("ciudadField");
-const modalidad = document.getElementById("modalidad");
-const infoModalidad = document.getElementById("infoModalidad");
-const textoModalidad = document.getElementById("textoModalidad");
-const tipoPaciente = document.getElementById("tipoPaciente");
-const labelNombre = document.getElementById("labelNombre");
-const costoTexto = document.getElementById("costoTexto");
-const btnSubmit = document.getElementById("btnSubmit");
-const respuesta = document.getElementById("respuesta");
-const reservaForm = document.getElementById("reservaForm");
+// Elementos del DOM
+const f = {
+    pais: document.getElementById("paisSelect"),
+    bolivia: document.getElementById("boliviaFields"),
+    otro: document.getElementById("otroPaisField"),
+    depto: document.getElementById("departamento"),
+    ciudad: document.getElementById("ciudadField"),
+    mod: document.getElementById("modalidad"),
+    tipo: document.getElementById("tipoPaciente"),
+    lblNombre: document.getElementById("labelNombre"),
+    costo: document.getElementById("costoTexto"),
+    form: document.getElementById("reservaForm"),
+    btn: document.getElementById("btnSubmit"),
+    resp: document.getElementById("respuesta"),
+    modal: document.getElementById("successModal")
+};
 
-// 1. Lógica País
-paisSelect.addEventListener("change", () => {
-  if (paisSelect.value === "Bolivia") {
-    boliviaFields.style.display = "block";
-    otroPaisField.style.display = "none";
-    modalidad.querySelector("option[value='Presencial']").disabled = false;
-  } else if (paisSelect.value === "Otro") {
-    boliviaFields.style.display = "none";
-    otroPaisField.style.display = "block";
-    modalidad.value = "Virtual";
-    modalidad.querySelector("option[value='Presencial']").disabled = true;
-    infoModalidad.style.display = "block";
-    textoModalidad.textContent = "Nota: Para pacientes internacionales, las consultas son exclusivamente virtuales.";
+// Lógica de Visibilidad
+f.pais.addEventListener("change", () => {
+  const isBol = f.pais.value === "Bolivia";
+  f.bolivia.style.display = isBol ? "block" : "none";
+  f.otro.style.display = isBol ? "none" : "block";
+  if(!isBol) {
+      f.mod.value = "Virtual";
+      f.mod.options[1].disabled = true; // Deshabilitar presencial
+  } else {
+      f.mod.options[1].disabled = false;
   }
 });
 
-// 2. Lógica Departamento
-departamento.addEventListener("change", () => {
-  if (departamento.value === "Cochabamba") {
-    ciudadField.style.display = "block";
-    modalidad.querySelector("option[value='Presencial']").disabled = false;
-    infoModalidad.style.display = "none";
-  } else {
-    ciudadField.style.display = "none";
-    modalidad.value = "Virtual";
-    modalidad.querySelector("option[value='Presencial']").disabled = true;
-    infoModalidad.style.display = "block";
-    textoModalidad.textContent = "Las sesiones presenciales solo están disponibles en la ciudad de Cochabamba.";
-  }
+f.depto.addEventListener("change", () => {
+  f.ciudad.style.display = f.depto.value === "Cochabamba" ? "block" : "none";
 });
 
-// 3. Lógica Tipo de Paciente
-tipoPaciente.addEventListener("change", () => {
-  if (tipoPaciente.value === "estudiante") {
-    labelNombre.textContent = "Nombre completo del Estudiante:";
-    costoTexto.textContent = "Estudiante Fundación: 90 Bs por sesión";
-  } else {
-    labelNombre.textContent = "Nombre completo:";
-    costoTexto.textContent = "Primera sesión: 250 Bs | Siguientes: 150 Bs";
-  }
+f.tipo.addEventListener("change", () => {
+  const isEst = f.tipo.value === "estudiante";
+  f.lblNombre.textContent = isEst ? "Nombre del Estudiante:" : "Nombre completo del Paciente:";
+  f.costo.textContent = isEst ? "Estudiante Fundación: 90 Bs por sesión" : "Primera sesión: 250 Bs | Siguientes: 150 Bs";
 });
 
 async function fileToBase64(file) {
-  return new Promise((resolve) => {
+  return new Promise((r) => {
     const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
+    reader.onload = () => r(reader.result);
     reader.readAsDataURL(file);
   });
 }
 
-// 5. ENVÍO CORREGIDO
-reservaForm.addEventListener("submit", async (e) => {
+f.form.addEventListener("submit", async (e) => {
   e.preventDefault();
   
-  btnSubmit.disabled = true;
-  btnSubmit.textContent = "Procesando...";
-  respuesta.textContent = "Enviando datos...";
-  respuesta.style.color = "#333";
+  f.btn.disabled = true;
+  f.btn.textContent = "Registrando...";
+  f.resp.textContent = "Enviando notificación...";
 
   try {
     const file = document.getElementById("comprobante").files[0];
     const base64Img = await fileToBase64(file);
     
-    const payload = {
-      action: "reserva",
+    const d = {
       nombre: document.getElementById("nombre").value,
-      sexo: document.getElementById("sexo").value,
-      edad: document.getElementById("edad").value,
-      pais: paisSelect.value === "Bolivia" ? "Bolivia" : (document.getElementById("paisLibre").value || "Otro"),
-      departamento: departamento.value,
-      ciudad: document.getElementById("ciudad").value || "N/A",
-      telefono: document.getElementById("telefono").value,
-      tipoPaciente: tipoPaciente.value === "estudiante" ? "Estudiante Fundación" : "Particular",
+      tel: document.getElementById("telefono").value,
       motivo: document.getElementById("motivoConsulta").value,
-      profesional: document.getElementById("profesional").value,
-      modalidad: modalidad.value,
-      fecha: document.getElementById("fecha").value,
-      hora: document.getElementById("hora").value,
-      comprobante: base64Img
+      prof: document.getElementById("profesional").value,
+      mod: f.mod.value,
+      fec: document.getElementById("fecha").value,
+      hor: document.getElementById("hora").value,
+      tipo: f.tipo.value === "estudiante" ? "Estudiante" : "Particular",
+      img: base64Img
     };
 
-    // A. WHATSAPP PRIMERO (Sin esperar a nadie)
-    const phones = { 
-        "Lic. Christian": "59167413716", 
-        "Mgr. Sandra": "59167439286", 
-        "Lic. Fernando": "59162690019" 
-    };
-    const target = phones[payload.profesional] || "59167413716";
-    const msg = `🔔 *Nueva Reserva*%0A👤 *Paciente:* ${payload.nombre}%0A🏷️ *Tipo:* ${payload.tipoPaciente}%0A📅 *Fecha:* ${payload.fecha}%0A⏰ *Hora:* ${payload.hora}%0A💻 *Mod:* ${payload.modalidad}`;
+    // 1. Mensaje para el PROFESIONAL (Detallado como pediste)
+    const phones = { "Lic. Christian": "59167413716", "Mgr. Sandra": "59167439286", "Lic. Fernando": "59162690019" };
+    const pNum = phones[d.prof] || "59167413716";
     
-    // Abrimos WhatsApp inmediatamente
-    window.open(`https://wa.me/${target}?text=${msg}`, '_blank');
+    const profMsg = `*NUEVA RESERVA WEB*%0A--------------------------%0A👤 *Paciente:* ${d.nombre}%0A📅 *Fecha:* ${d.fec}%0A⏰ *Hora:* ${d.hor}%0A🏥 *Modalidad:* ${d.mod}%0A📝 *Motivo:* ${d.motivo}%0A📞 *WhatsApp Paciente:* ${d.tel}%0A--------------------------%0A_El paciente enviará el comprobante a continuación._`;
 
-    // B. GOOGLE Y EMAIL EN SEGUNDO PLANO (Sin 'await' que bloquee)
-    fetch(GOOGLE_WEBAPP_URL, {
-      method: "POST",
-      mode: "no-cors",
-      body: JSON.stringify(payload)
-    }).catch(e => console.log("Google background err:", e));
+    // Abrir WhatsApp para el profesional
+    window.open(`https://wa.me/${pNum}?text=${profMsg}`, '_blank');
 
-    const emails = { 
-        "Lic. Christian": "guentokhrjss@gmail.com", 
-        "Mgr. Sandra": "babayaga352@gmail.com", 
-        "Lic. Fernando": "delatorre.cortes.fernando@gmail.com" 
-    };
-    emailjs.send("service_bj6yafl", "template_k35sy5s", {
-      ...payload,
-      correo_destino: emails[payload.profesional] || "fundacion.plenitud.bo@gmail.com"
-    }).catch(e => console.log("Email background err:", e));
-
-    // C. ÉXITO VISUAL
-    respuesta.style.color = "green";
-    respuesta.textContent = "✅ ¡Enviado! Si no se abrió WhatsApp, haz clic en el botón de nuevo.";
+    // 2. Envío a Google Sheets / EmailJS (Segundo plano)
+    fetch(GOOGLE_WEBAPP_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(d) });
     
+    // 3. Mostrar Modal de Éxito al Paciente
     setTimeout(() => {
-        reservaForm.reset();
-        btnSubmit.disabled = false;
-        btnSubmit.textContent = "Enviar Reserva";
-    }, 2000);
+        f.modal.style.display = "flex";
+        f.resp.textContent = "";
+        f.btn.disabled = false;
+        f.btn.textContent = "Finalizar y Reservar Cita";
+    }, 1000);
 
   } catch (err) {
-    respuesta.style.color = "red";
-    respuesta.textContent = "❌ Error al procesar imagen.";
-    btnSubmit.disabled = false;
-    btnSubmit.textContent = "Enviar Reserva";
+    f.resp.style.color = "red";
+    f.resp.textContent = "Hubo un problema. Reintente por favor.";
+    f.btn.disabled = false;
   }
 });
 </script>
