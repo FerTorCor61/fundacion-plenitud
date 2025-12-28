@@ -172,6 +172,7 @@
     background: #133863;
 }
 
+/* Footer Logos */
 .footer-logos {
     display: flex;
     justify-content: center;
@@ -182,9 +183,13 @@
 }
 
 .footer-logos img {
-    max-height: 80px;
-    width: auto;
-    filter: grayscale(20%);
+    object-fit: contain;
+}
+
+.contact-info {
+    text-align: center;
+    line-height: 1.6;
+    color: #333;
 }
 </style>
 
@@ -251,7 +256,7 @@
     
     <section class="horarios-info-container">
         <h2>Horarios de Atención en Consultorio</h2>
-        <p>Nuestro equipo le atenderá de Lunes a Viernes en los siguientes horarios:</p>
+        <p>Nuestro equipo le atenderá de Lunes a Viernes en los siguientes horarios. Por favor, contacte con nosotros para reservar su cita.</p>
         <div class="horarios-lista">
             <div class="horario-bloque">Mañana: 09:00 a 12:00 hrs.</div>
             <div class="horario-bloque">Tarde: 14:00 a 18:00 hrs.</div>
@@ -261,6 +266,7 @@
     </section>
 </main>
 
+<!-- MODAL PARA MOSTRAR DETALLES -->
 <div id="modalServicio" class="modal-servicio">
     <div class="modal-content-servicio">
         <span class="close-modal" onclick="closeModal()">&times;</span>
@@ -276,44 +282,63 @@
 </div>
 
 <footer class="site-footer">
-  <div class="container" style="text-align: center; padding: 40px 0;">
+  <div class="container">
     <div class="footer-logos">
-      <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/umss.png" alt="UMSS">
-      <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/ColePsico.png" alt="Colegio de Psicólogos">
-      <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/humanidades.jpg" alt="Facultad de Humanidades">
-      <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/posgrado.jpg" alt="Posgrado">
+      <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/umss.png" alt="UMSS" height="150" width="150">
+      <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/ColePsico.png" alt="Colegio de Psicólogos" height="150" width="250">
+      <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/humanidades.jpg" alt="Facultad de Humanidades" height="150" width="250">
+      <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/posgrado.jpg" alt="Posgrado" height="150" width="250">
     </div>
     
     <div class="contact-info">
-      <p>WhatsApp: (+591) 674-13-716 | <a href="mailto:fundacion.plenitud.bo@gmail.com">fundacion.plenitud.bo@gmail.com</a></p>
+      <p>WhatsApp: (+591) 674-13-716 | Correo: <a href="mailto:fundacion.plenitud.bo@gmail.com">fundacion.plenitud.bo@gmail.com</a></p>
+      <p>WhatsApp: (+591) 674-39-286 | Teléfono: (+591 - 4) 428-40-25</p>
+      <p>WhatsApp: (+591) 626-90-019</p>
+      <p>Facebook: <a href="https://www.facebook.com/fundacionplenitudbolivia" target="_blank">Fundación Plenitud</a></p>
+      <p>NIT: 382663023 - Régimen General | Reconocimiento Legal: Decreto Departamental N° 3973</p>
       <p>&copy; 2025 Fundación Plenitud. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>
 
 <script>
+// Base URL de las imágenes en GitHub
 const ghBase = "https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/";
 
 const datosServicios = {
     1: {
         titulo: "1. Gabinete Psicológico",
         imagen: ghBase + "Fundación.jpg",
-        contenido: `<ul><li>Terapia Individual</li><li>Terapia de Pareja</li><li>Terapia Familiar</li></ul><p>Espacios diseñados para el bienestar emocional bajo un enfoque profesional.</p>`
+        contenido: `<ul>
+                        <li>Terapia Individual</li>
+                        <li>Terapia de Pareja</li>
+                        <li>Terapia Familiar</li>
+                    </ul>
+                    <p>Espacios diseñados para el bienestar emocional y la resolución de conflictos bajo un enfoque profesional y ético en nuestro consultorio.</p>`
     },
     2: {
         titulo: "2. Apoyo PsicoNeurológico",
         imagen: ghBase + "Neuropsico.jpg",
-        contenido: `<ul><li>Diagnóstico Neuropsicológico</li><li>Estimulación Cognitiva</li></ul><p>Evaluamos y fortalecemos procesos cognitivos en todas las etapas de la vida.</p>`
+        contenido: `<ul>
+                        <li>Diagnóstico y Evaluación Neuropsicológica</li>
+                        <li>Terapia de Estimulación Cognitiva</li>
+                    </ul>
+                    <p>Evaluamos y fortalecemos procesos cognitivos tanto en adultos mayores como en infantes, adaptando nuestras técnicas a cada etapa de la vida.</p>`
     },
     3: {
         titulo: "3. Apoyo Psicoeducativo",
         imagen: ghBase + "psicoeducativo.jpg",
-        contenido: `<ul><li>Refuerzo Individualizado</li><li>Talleres de Habilidades Sociales</li></ul><p>Herramientas de aprendizaje para fomentar el desarrollo integral del niño.</p>`
+        contenido: `<ul>
+                        <li>Refuerzo Individualizado</li>
+                        <li>Talleres Grupales para Habilidades Sociales</li>
+                    </ul>
+                    <p>Brindamos herramientas de aprendizaje a través de sesiones personalizadas y dinámicas grupales con niños para fomentar su desarrollo integral.</p>`
     },
     4: {
         titulo: "4. Apoyo Sombra",
         imagen: ghBase + "sombra.jpg",
-        contenido: `<p>Acompañamiento especializado para la inclusión exitosa en entornos educativos regulares. Facilitamos la autonomía del niño en el aula.</p>`
+        contenido: `<p>Acompañamiento especializado para la inclusión exitosa en entornos educativos regulares.</p>
+                    <p>Nuestra terapeuta trabaja directamente en el aula, facilitando la autonomía del niño y su interacción positiva con el grupo escolar.</p>`
     }
 };
 
@@ -330,7 +355,8 @@ function closeModal() {
 }
 
 window.onclick = function(event) {
-    if (event.target == document.getElementById('modalServicio')) {
+    const modal = document.getElementById('modalServicio');
+    if (event.target == modal) {
         closeModal();
     }
 }
