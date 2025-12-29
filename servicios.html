@@ -64,7 +64,7 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
   margin: 20px auto;
   padding: 40px;
   border-radius: 20px;
-  max-width: 850px;
+  max-width: 900px;
   position: relative;
   box-shadow: 0 25px 50px rgba(0,0,0,0.3);
 }
@@ -72,7 +72,7 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
 .close-btn {
   position: absolute;
   top: 20px; right: 25px;
-  font-size: 30px; color: #aaa;
+  font-size: 35px; color: #aaa;
   cursor: pointer;
 }
 
@@ -86,30 +86,31 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
   margin-bottom: 30px;
 }
 
-.modal-header-section h2 { color: #1A4B84; font-size: 2rem; margin-bottom: 10px; }
+.modal-header-section h2 { color: #1A4B84; font-size: 2.2rem; margin-bottom: 10px; }
 .eslogan-highlight {
   display: inline-block;
   background: #eef4fb;
   color: #1A4B84;
-  padding: 8px 20px;
+  padding: 10px 25px;
   border-radius: 50px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
-.service-block { margin-bottom: 35px; }
+.service-block { margin-bottom: 40px; }
 .service-block h3 {
   color: #1A4B84;
   border-left: 5px solid #1A4B84;
   padding-left: 15px;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
 }
 
 .marketing-pill {
-  background: #fdfdfd;
+  background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  padding: 18px;
+  padding: 20px;
   margin-top: 15px;
 }
 
@@ -117,21 +118,36 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
   display: block;
   font-weight: bold;
   color: #2d3748;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 1px;
+  font-size: 0.8rem;
+  letter-spacing: 1.2px;
 }
 
-.beneficio-texto { color: #4a5568; font-style: italic; font-size: 0.95rem; }
+.beneficio-texto { color: #4a5568; font-style: italic; font-size: 1rem; }
+
+.key-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.badge {
+  background: #1A4B84;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
 
 .footer-summary {
   background: #1A4B84;
   color: white;
-  padding: 22px;
+  padding: 25px;
   border-radius: 12px;
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 500;
   margin-top: 40px;
 }
@@ -139,14 +155,15 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
 .btn-cta {
   display: block;
   width: fit-content;
-  margin: 25px auto 0;
-  padding: 12px 35px;
+  margin: 30px auto 0;
+  padding: 15px 40px;
   background: #1A4B84;
   color: white;
   text-decoration: none;
   border-radius: 50px;
   font-weight: bold;
   transition: 0.3s;
+  text-align: center;
 }
 
 .btn-cta:hover { background: #133863; transform: scale(1.05); }
@@ -170,46 +187,121 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
 
 <main class="container">
   <h1 style="text-align:center; color:#1A4B84; margin-top:50px;">Nuestros Servicios Especializados</h1>
-  <p style="text-align:center; max-width:750px; margin: 0 auto 40px;">En Fundación Plenitud, abordamos el desarrollo humano desde una perspectiva integral. Conoce nuestras áreas de intervención:</p>
+  <p style="text-align:center; max-width:750px; margin: 0 auto 40px;">En Fundación Plenitud, abordamos el desarrollo humano desde una perspectiva integral y científica. Explora nuestras áreas de intervención:</p>
 
   <div class="servicios-grid">
-    <!-- Gabinete -->
     <div class="servicio-card" onclick="openModal('modal-gabinete')">
       <img src="images/Fundación.jpg" alt="Gabinete Psicológico">
       <div class="info">
         <h3>Gabinete Psicológico</h3>
-        <p>Terapia individual y familiar para el crecimiento integral.</p>
+        <p>El epicentro del bienestar: Terapia individual, de pareja y familiar.</p>
       </div>
     </div>
 
-    <!-- Neuropsico -->
     <div class="servicio-card" onclick="openModal('modal-neuro')">
       <img src="images/Neuropsico.jpg" alt="Apoyo Psiconeurológico">
       <div class="info">
         <h3>Apoyo Psiconeurológico</h3>
-        <p>Evaluación y tratamiento del funcionamiento cerebral y cognitivo.</p>
+        <p>Evaluación y rehabilitación de procesos cognitivos y cerebrales.</p>
       </div>
     </div>
 
-    <!-- Psicoeducativo -->
     <div class="servicio-card" onclick="openModal('modal-psicoeducativo')">
       <img src="images/psicoeducativo.jpg" alt="Apoyo Psicoeducativo">
       <div class="info">
         <h3>Apoyo Psicoeducativo</h3>
-        <p>Aprender a aprender: Más allá de las notas, formamos mentes capaces.</p>
+        <p>Estrategias de aprendizaje personalizadas para el éxito académico.</p>
       </div>
     </div>
 
-    <!-- Apoyo Sombra -->
     <div class="servicio-card" onclick="openModal('modal-sombra')">
       <img src="images/Apoyo.jpg" alt="Apoyo Sombra">
       <div class="info">
         <h3>Apoyo Sombra</h3>
-        <p>El puente hacia la inclusión: acompañamiento especializado en el aula.</p>
+        <p>Facilitando la inclusión escolar mediante el acompañamiento terapéutico.</p>
       </div>
     </div>
   </div>
 </main>
+
+<!-- MODAL GABINETE PSICOLÓGICO (ESTRUCTURA COMPLETA) -->
+<div id="modal-gabinete" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('modal-gabinete')">&times;</span>
+    <div class="modal-header-section">
+      <h2>Gabinete Psicológico</h2>
+      <div class="eslogan-highlight">"Un espacio para ser, un lugar para sanar"</div>
+    </div>
+
+    <div class="service-block">
+      <h3>1. El Epicentro del Bienestar</h3>
+      <p>Es el marco profesional donde aplicamos metodologías científicas para el abordaje de la salud mental. Se caracteriza por la confidencialidad, la escucha activa y la aplicación de corrientes terapéuticas (como la Cognitivo-Conductual o Sistémica) adaptadas a cada paciente.</p>
+      <div class="marketing-pill">
+        <span class="pill-title">Propuesta de Valor</span>
+        <div class="beneficio-texto">No es una práctica aislada; es un equipo multidisciplinar que ofrece mayor respaldo y rigor científico al paciente.</div>
+        <div class="key-points">
+          <span class="badge">Confidencialidad</span>
+          <span class="badge">Rigor Científico</span>
+          <span class="badge">Bienestar Integral</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-block">
+      <h3>2. Terapia Individual: Reencuéntrate contigo mismo</h3>
+      <p>Un proceso de colaboración destinado a resolver conflictos internos, gestionar síntomas (ansiedad, estrés) y potenciar el autoconocimiento, identificando patrones de pensamiento y adquiriendo herramientas prácticas.</p>
+      <div class="marketing-pill">
+        <span class="pill-title">El Gancho</span>
+        <div class="beneficio-texto">"Deja de 'sobrellevar' tus problemas y empieza a vivirlos de otra manera. Recupera el control con herramientas diseñadas para ti."</div>
+      </div>
+    </div>
+
+    <div class="service-block">
+      <h3>3. Terapia de Pareja: Reconstruyendo el vínculo</h3>
+      <p>Intervención dirigida a parejas en crisis, problemas de comunicación o falta de intimidad. Actuamos como mediadores neutrales para identificar ciclos negativos y enseñar nuevas formas de validación.</p>
+      <div class="marketing-pill">
+        <span class="pill-title">Enfoque de Conexión</span>
+        <div class="beneficio-texto">"No se trata de quién tiene la razón, sino de cómo volver a conectar. Transformamos la confrontación en comunicación asertiva."</div>
+      </div>
+    </div>
+
+    <div class="service-block">
+      <h3>4. Terapia Familiar: Fortaleciendo la base</h3>
+      <p>Abordaje de dinámicas complejas: problemas de conducta, transiciones (divorcios, duelos) o falta de límites. El objetivo es mejorar la cohesión y asegurar que cada miembro sea respetado.</p>
+      <div class="marketing-pill">
+        <span class="pill-title">Mensaje Clave</span>
+        <div class="beneficio-texto">"Si una pieza del sistema sufre, todo se afecta. Protegemos la armonía familiar mediante la escucha y el respeto mutuo."</div>
+      </div>
+    </div>
+
+    <a href="contacto.html" class="btn-cta">Agendar Sesión de Gabinete</a>
+  </div>
+</div>
+
+<!-- MODAL APOYO PSICONEUROLÓGICO (CONTENIDO INTEGRADO) -->
+<div id="modal-neuro" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('modal-neuro')">&times;</span>
+    <div class="modal-header-section">
+      <h2>Apoyo Psiconeurológico</h2>
+      <div class="eslogan-highlight">"Potenciando el cerebro para transformar la vida"</div>
+    </div>
+
+    <div class="service-block">
+      <h3>Evaluación y Rehabilitación</h3>
+      <p>Nos especializamos en la relación entre las estructuras cerebrales y el comportamiento. Evaluamos funciones como la memoria, la atención y el lenguaje para diseñar programas de rehabilitación específicos.</p>
+      <div class="marketing-pill">
+        <span class="pill-title">Enfoque Científico</span>
+        <div class="beneficio-texto">Utilizamos pruebas estandarizadas para entender el perfil neurocognitivo del paciente, permitiendo una intervención precisa en casos de TDAH, dificultades de aprendizaje o daño cerebral.</div>
+      </div>
+    </div>
+
+    <div class="footer-summary">
+      "La neurociencia al servicio del desarrollo humano: entendemos cómo funciona tu cerebro para ayudarte a alcanzar tu máximo potencial."
+    </div>
+    <a href="contacto.html" class="btn-cta">Consultar Evaluación Neuropsicológica</a>
+  </div>
+</div>
 
 <!-- MODAL APOYO PSICOEDUCATIVO -->
 <div id="modal-psicoeducativo" class="modal">
@@ -217,29 +309,25 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
     <span class="close-btn" onclick="closeModal('modal-psicoeducativo')">&times;</span>
     <div class="modal-header-section">
       <h2>Apoyo Psicoeducativo</h2>
-      <div class="eslogan-highlight">"Aprender a aprender: Más allá de las notas, formamos mentes capaces"</div>
+      <div class="eslogan-highlight">"Aprender a aprender: Formamos mentes capaces"</div>
     </div>
 
     <div class="service-block">
-      <h3>1. El Concepto y Metodología</h3>
-      <p>Fusionamos la psicología con la educación para optimizar el proceso de aprendizaje. No solo enseñamos, capacitamos para aprender, identificando barreras emocionales, cognitivas o conductuales.</p>
+      <h3>Metodología: Fusión Psicología-Educación</h3>
+      <p>Optimizamos el proceso de aprendizaje identificando barreras emocionales o cognitivas. No solo damos clases; capacitamos al alumno para que sea autónomo en su estudio.</p>
       <div class="marketing-pill">
-        <span class="pill-title">Enfoque de Impacto</span>
-        <div class="beneficio-texto">Nuestro enfoque no es solo memorizar, sino comprender. Desarrollamos estrategias personalizadas que potencian la inteligencia y la autonomía de cada alumno.</div>
+        <span class="pill-title">Beneficio Directo</span>
+        <div class="beneficio-texto">Desarrollamos estrategias personalizadas que transforman la frustración escolar en progreso visible y confianza en uno mismo.</div>
       </div>
     </div>
 
     <div class="service-block">
-      <h3>2. Refuerzo Individualizado</h3>
-      <p>Un traje a medida para cada cerebro. Sesiones 1 a 1 donde especialistas abordan la falta de atención, desorganización, dislexia o discalculia con técnicas efectivas de gestión del tiempo.</p>
-      <div class="marketing-pill">
-        <span class="pill-title">Tu camino diseñado para ti</span>
-        <div class="beneficio-texto">Cada cerebro es único. Ofrecemos un acompañamiento que transforma la frustración en progreso visible y duradero.</div>
-      </div>
+      <h3>Refuerzo Individualizado</h3>
+      <p>Abordamos la falta de atención, desorganización, dislexia o discalculia con técnicas efectivas de gestión del tiempo y técnicas de estudio de vanguardia.</p>
     </div>
 
     <div class="footer-summary">
-      "Brindamos herramientas de aprendizaje a través de sesiones personalizadas y dinámicas grupales con niños para fomentar su desarrollo integral."
+      "Brindamos herramientas de aprendizaje a través de sesiones dinámicas para fomentar el desarrollo integral del estudiante."
     </div>
   </div>
 </div>
@@ -250,68 +338,32 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
     <span class="close-btn" onclick="closeModal('modal-sombra')">&times;</span>
     <div class="modal-header-section">
       <h2>Apoyo Sombra</h2>
-      <div class="eslogan-highlight">"El Puente hacia la Inclusión"</div>
+      <div class="eslogan-highlight">"El Puente hacia la Inclusión Real"</div>
     </div>
 
     <div class="service-block">
-      <h3>El Concepto: Una figura facilitadora</h3>
-      <p>Permitimos que la escuela sea un lugar de éxito para todos, sin importar sus desafíos. Es el apoyo que hace posible que el aula regular sea realmente inclusiva.</p>
+      <h3>¿De qué se trata? Mediación Invisible</h3>
+      <p>Es un servicio de acompañamiento terapéutico presencial dentro del entorno escolar. La terapeuta actúa como un facilitador que traduce las demandas del entorno para el niño.</p>
       <div class="marketing-pill">
-        <span class="pill-title">¿De qué se trata?</span>
-        <div class="beneficio-texto">Es un acompañamiento terapéutico presencial donde la terapeuta sombra actúa como un <strong>mediador invisible</strong>. Traduce las demandas del entorno para el niño y facilita la interacción autónoma con sus compañeros.</div>
+        <span class="pill-title">Nuestra Misión de Inclusión</span>
+        <div class="beneficio-texto">Ayudamos al alumno a organizarse y regularse emocionalmente, mientras facilitamos que interactúe con sus compañeros de forma autónoma.</div>
       </div>
     </div>
 
     <div class="service-block">
-      <h3>Enfoque de Impacto y Misión</h3>
-      <p><strong>Acompañamiento especializado para la inclusión exitosa en entornos educativos regulares.</strong> Trabajamos directamente en el aula, facilitando la autonomía del niño y su interacción positiva con el grupo escolar.</p>
+      <h3>Impacto en el Aula</h3>
+      <p>Trabajamos directamente en el aula regular, asegurando que el alumno no solo "esté" presente, sino que participe y socialice efectivamente.</p>
       <div class="marketing-pill">
-        <span class="pill-title">Mensaje Clave: Presencia que impulsa la autonomía</span>
-        <div class="beneficio-texto">Eliminamos las barreras que impiden el progreso del niño. Aseguramos que el alumno no solo "esté" en clase, sino que participe, aprenda y socialice, dándole la seguridad necesaria para volar solo.</div>
+        <span class="pill-title">El Gancho</span>
+        <div class="beneficio-texto">"Una presencia que impulsa la autonomía. Damos la seguridad que el niño necesita para volar solo en el futuro."</div>
       </div>
     </div>
 
     <div class="footer-summary">
-      "Nuestra labor garantiza que el niño sea incluido con éxito, potenciando su desarrollo en el entorno escolar ordinario."
+      "Transformamos el aula en un espacio de verdadera inclusión, eliminando las barreras que impiden el progreso académico y social."
     </div>
-
+    
     <a href="contacto.html" class="btn-cta">Solicitar Información del Servicio</a>
-  </div>
-</div>
-
-<!-- MODAL GABINETE PSICOLÓGICO -->
-<div id="modal-gabinete" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeModal('modal-gabinete')">&times;</span>
-    <div class="modal-header-section">
-      <h2>Gabinete Psicológico</h2>
-      <div class="eslogan-highlight">"Cuidado integral para tu bienestar emocional"</div>
-    </div>
-    <div class="service-block">
-      <h3>Terapia Individual y Familiar</h3>
-      <p>Ofrecemos un espacio seguro y profesional para abordar desafíos emocionales, conductuales y de desarrollo, brindando herramientas prácticas para la vida diaria.</p>
-    </div>
-    <div class="footer-summary">
-      Profesionales comprometidos con el crecimiento y la estabilidad emocional de toda la familia.
-    </div>
-  </div>
-</div>
-
-<!-- MODAL APOYO PSICONEUROLÓGICO -->
-<div id="modal-neuro" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeModal('modal-neuro')">&times;</span>
-    <div class="modal-header-section">
-      <h2>Apoyo Psiconeurológico</h2>
-      <div class="eslogan-highlight">"Comprendiendo el potencial del cerebro"</div>
-    </div>
-    <div class="service-block">
-      <h3>Evaluación y Rehabilitación Cognitiva</h3>
-      <p>Análisis profundo del funcionamiento cognitivo para diseñar planes de intervención que fortalezcan las funciones ejecutivas, memoria y atención.</p>
-    </div>
-    <div class="footer-summary">
-      Ciencia y empatía aplicadas al desarrollo de las capacidades cognitivas.
-    </div>
   </div>
 </div>
 
