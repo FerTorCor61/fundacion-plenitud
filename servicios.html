@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Servicios - Fundación Plenitud</title>
+<title>Servicios y Horarios - Fundación Plenitud</title>
 <link rel="stylesheet" href="styles.css">
 
 <!-- EmailJS -->
@@ -15,105 +15,184 @@
 </script>
 
 <style>
-/* Estilos específicos para la cuadrícula de servicios dentro del formato estándar */
+/* ---------- Estilos para las Tarjetas de Servicios ---------- */
 .servicios-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
   margin: 30px 0;
 }
 
 .servicio-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  background: white;
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   cursor: pointer;
-  transition: box-shadow 0.3s ease;
-  text-align: center;
+  transition: transform 0.3s ease;
+  border: 1px solid #eee;
 }
 
 .servicio-card:hover {
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
-.servicio-card img {
+.servicio-img-container {
   width: 100%;
-  height: 200px;
+  height: 180px;
+  overflow: hidden;
+  background-color: #f4f4f4;
+}
+
+.servicio-img-container img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
 .servicio-card h3 {
   padding: 15px;
   margin: 0;
-  background: #f8f8f8;
-  font-size: 1.1em;
-  color: #333;
+  font-size: 1.1rem;
+  text-align: center;
+  color: #1A4B84;
+  background: #f9f9f9;
 }
 
-/* Modal */
+/* ---------- Estilos del Modal ---------- */
 .modal-servicio {
   display: none;
   position: fixed;
-  z-index: 9999;
+  z-index: 2000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.8);
   align-items: center;
   justify-content: center;
   padding: 20px;
 }
 
-.modal-content {
+.modal-content-servicio {
   background: white;
-  max-width: 600px;
+  max-width: 700px;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 15px;
   position: relative;
-  overflow: hidden;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: animatetop 0.4s;
+}
+
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
 }
 
 .close-modal {
   position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 28px;
-  cursor: pointer;
+  top: 15px;
+  right: 20px;
+  font-size: 30px;
+  font-weight: bold;
   color: #333;
+  cursor: pointer;
+  z-index: 10;
 }
 
-.modal-body {
-  padding: 20px;
+.modal-body-servicio {
+  padding: 30px;
 }
 
-.modal-body img {
+.modal-header-img {
   width: 100%;
-  height: auto;
-  margin-bottom: 20px;
-  border-radius: 4px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 15px 15px 0 0;
 }
 
-.horarios-box {
-  background: #f0f4f8;
-  padding: 20px;
-  border-radius: 8px;
-  margin-top: 40px;
+.modal-body-servicio h2 {
+  color: #1A4B84;
+  margin-top: 0;
+}
+
+.modal-body-servicio ul {
+  padding-left: 20px;
+  line-height: 1.8;
+}
+
+/* Ajustes generales del container */
+.servicios-container h2 {
   text-align: center;
-  border-left: 5px solid #1A4B84;
+  color: #1A4B84;
+  margin-bottom: 10px;
 }
 
-.btn-consulta {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 20px;
-  background-color: #1A4B84;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
+/* Horarios */
+.horarios-info-container {
+    text-align: center;
+    margin-top: 50px;
+    padding: 30px;
+    background: #f0f7ff;
+    border-radius: 15px;
+}
+
+.horarios-lista {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.horario-bloque {
+    background: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    border: 1px solid #1A4B84;
+    color: #1A4B84;
+    font-weight: bold;
+}
+
+.cta-button {
+    background: #1A4B84;
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background: #133863;
+}
+
+/* Footer Logos */
+.footer-logos {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.footer-logos img {
+    object-fit: contain;
+}
+
+.contact-info {
+    text-align: center;
+    line-height: 1.6;
+    color: #333;
 }
 </style>
+
 </head>
 
 <body>
@@ -121,7 +200,7 @@
 <header class="site-header">
   <div class="container">
     <div class="logo">
-      <img src="images/logo.png" alt="Fundación Plenitud logo">
+      <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/logo.png" alt="Fundación Plenitud logo" style="max-height: 80px;">
     </div>
 
     <nav class="main-nav">
@@ -136,68 +215,86 @@
 </header>
 
 <main class="container">
-  <section class="page">
-    <h2>Nuestros Servicios</h2>
-    <p>Brindamos atención especializada e integral para promover el bienestar y desarrollo de la comunidad.</p>
+    <section class="servicios-container">
+        <h2>Nuestros Servicios de Apoyo y Desarrollo</h2>
+        <p style="text-align: center;">Ofrecemos un acompañamiento integral especializado en la niñez, adolescencia y jóvenes con discapacidad intelectual.</p>
+        
+        <div class="servicios-grid">
+            <!-- Item 1: Gabinete -->
+            <div class="servicio-card" onclick="openModal(1)">
+                <div class="servicio-img-container">
+                    <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/Fundación.jpg" alt="Gabinete Psicológico">
+                </div>
+                <h3>1. Gabinete Psicológico</h3>
+            </div>
 
-    <div class="servicios-grid">
-      <div class="servicio-card" onclick="openModal(1)">
-        <img src="images/Fundación.jpg" alt="Gabinete Psicológico">
-        <h3>1. Gabinete Psicológico</h3>
-      </div>
+            <!-- Item 2: PsicoNeurológico -->
+            <div class="servicio-card" onclick="openModal(2)">
+                <div class="servicio-img-container">
+                    <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/Neuropsico.jpg" alt="Apoyo PsicoNeurológico">
+                </div>
+                <h3>2. Apoyo PsicoNeurológico</h3>
+            </div>
 
-      <div class="servicio-card" onclick="openModal(2)">
-        <img src="images/Neuropsico.jpg" alt="Apoyo PsicoNeurológico">
-        <h3>2. Apoyo PsicoNeurológico</h3>
-      </div>
+            <!-- Item 3: Psicoeducativo -->
+            <div class="servicio-card" onclick="openModal(3)">
+                <div class="servicio-img-container">
+                    <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/psicoeducativo.jpg" alt="Apoyo Psicoeducativo">
+                </div>
+                <h3>3. Apoyo Psicoeducativo</h3>
+            </div>
 
-      <div class="servicio-card" onclick="openModal(3)">
-        <img src="images/psicoeducativo.jpg" alt="Apoyo Psicoeducativo">
-        <h3>3. Apoyo Psicoeducativo</h3>
-      </div>
-
-      <div class="servicio-card" onclick="openModal(4)">
-        <img src="images/sombra.jpg" alt="Apoyo Sombra">
-        <h3>4. Apoyo Sombra</h3>
-      </div>
-    </div>
-
-    <div class="horarios-box">
-      <h3>Horarios de Atención</h3>
-      <p>Lunes a Viernes</p>
-      <p><strong>Mañanas:</strong> 09:00 - 12:00 | <strong>Tardes:</strong> 14:00 - 18:00</p>
-      <p><small>* Solo bajo cita previa</small></p>
-      <a href="contacto.html" class="btn-consulta">Agendar una Cita</a>
-    </div>
-  </section>
+            <!-- Item 4: Sombra -->
+            <div class="servicio-card" onclick="openModal(4)">
+                <div class="servicio-img-container">
+                    <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/sombra.jpg" alt="Apoyo Sombra">
+                </div>
+                <h3>4. Apoyo Sombra</h3>
+            </div>
+        </div>
+    </section>
+    
+    <section class="horarios-info-container">
+        <h2>Horarios de Atención en Consultorio</h2>
+        <p>Nuestro equipo le atenderá de Lunes a Viernes en los siguientes horarios. Por favor, contacte con nosotros para reservar su cita.</p>
+        <div class="horarios-lista">
+            <div class="horario-bloque">Mañana: 09:00 a 12:00 hrs.</div>
+            <div class="horario-bloque">Tarde: 14:00 a 18:00 hrs.</div>
+        </div>
+        <p class="nota">Atención disponible solo con cita previa. Fines de semana y feriados cerrados.</p>
+        <a href="contacto.html" class="cta-button">Agendar Cita / Solicitar Información</a>
+    </section>
 </main>
 
-<!-- Modal Estructura -->
+<!-- MODAL PARA MOSTRAR DETALLES -->
 <div id="modalServicio" class="modal-servicio">
-  <div class="modal-content">
-    <span class="close-modal" onclick="closeModal()">&times;</span>
-    <div class="modal-body">
-      <img id="m-img" src="" alt="Servicio">
-      <h3 id="m-titulo"></h3>
-      <div id="m-desc"></div>
+    <div class="modal-content-servicio">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <img id="modalImg" src="" class="modal-header-img" alt="Imagen Servicio">
+        <div class="modal-body-servicio">
+            <h2 id="modalTitulo">Título</h2>
+            <div id="modalContenido">Contenido</div>
+            <div style="text-align: center; margin-top: 25px;">
+                <a href="contacto.html" class="cta-button">Consultar Disponibilidad</a>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <footer class="site-footer">
   <div class="container">
     <div class="footer-logos">
-      <img src="images/umss.png" alt="UMSS" height="150" width="150">
-      <img src="images/ColePsico.png" alt="Colegio de Psicólogos" height="150" width="250">
-      <img src="images/humanidades.jpg" alt="Facultad de Humanidades" height="150" width="250">
-      <img src="images/posgrado.jpg" alt="Posgrado" height="150" width="250">
+      <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/umss.png" alt="UMSS" height="150" width="150">
+      <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/ColePsico.png" alt="Colegio de Psicólogos" height="150" width="250">
+      <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/humanidades.jpg" alt="Facultad de Humanidades" height="150" width="250">
+      <img src="https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/posgrado.jpg" alt="Posgrado" height="150" width="250">
     </div>
     
     <div class="contact-info">
       <p>WhatsApp: (+591) 674-13-716 | Correo: <a href="mailto:fundacion.plenitud.bo@gmail.com">fundacion.plenitud.bo@gmail.com</a></p>
       <p>WhatsApp: (+591) 674-39-286 | Teléfono: (+591 - 4) 428-40-25</p>
       <p>WhatsApp: (+591) 626-90-019</p>
-      <p>Facebook: <a href="https://www.facebook.com/fundacionplenitudbolivia">Fundación Plenitud</a></p>
+      <p>Facebook: <a href="https://www.facebook.com/fundacionplenitudbolivia" target="_blank">Fundación Plenitud</a></p>
       <p>NIT: 382663023 - Régimen General | Reconocimiento Legal: Decreto Departamental N° 3973</p>
       <p>&copy; 2025 Fundación Plenitud. Todos los derechos reservados.</p>
     </div>
@@ -205,45 +302,63 @@
 </footer>
 
 <script>
-const servicios = {
-  1: {
-    titulo: "Gabinete Psicológico",
-    img: "images/Fundación.jpg",
-    desc: "<p>Ofrecemos sesiones de terapia individual, de pareja y familiar enfocadas en la salud mental y el equilibrio emocional.</p>"
-  },
-  2: {
-    titulo: "Apoyo PsicoNeurológico",
-    img: "images/Neuropsico.jpg",
-    desc: "<p>Evaluación y rehabilitación de funciones cognitivas para niños y adultos con necesidades neurológicas específicas.</p>"
-  },
-  3: {
-    titulo: "Apoyo Psicoeducativo",
-    img: "images/psicoeducativo.jpg",
-    desc: "<p>Refuerzo escolar especializado y talleres de habilidades sociales para potenciar el aprendizaje y la integración.</p>"
-  },
-  4: {
-    titulo: "Apoyo Sombra",
-    img: "images/sombra.jpg",
-    desc: "<p>Acompañamiento profesional en el aula para facilitar la inclusión educativa de niños en entornos escolares regulares.</p>"
-  }
+// Base URL de las imágenes en GitHub
+const ghBase = "https://raw.githubusercontent.com/FerTorCor61/fundacion-plenitud/main/images/";
+
+const datosServicios = {
+    1: {
+        titulo: "1. Gabinete Psicológico",
+        imagen: ghBase + "Fundación.jpg",
+        contenido: `<ul>
+                        <li>Terapia Individual</li>
+                        <li>Terapia de Pareja</li>
+                        <li>Terapia Familiar</li>
+                    </ul>
+                    <p>Espacios diseñados para el bienestar emocional y la resolución de conflictos bajo un enfoque profesional y ético en nuestro consultorio.</p>`
+    },
+    2: {
+        titulo: "2. Apoyo PsicoNeurológico",
+        imagen: ghBase + "Neuropsico.jpg",
+        contenido: `<ul>
+                        <li>Diagnóstico y Evaluación Neuropsicológica</li>
+                        <li>Terapia de Estimulación Cognitiva</li>
+                    </ul>
+                    <p>Evaluamos y fortalecemos procesos cognitivos tanto en adultos mayores como en infantes, adaptando nuestras técnicas a cada etapa de la vida.</p>`
+    },
+    3: {
+        titulo: "3. Apoyo Psicoeducativo",
+        imagen: ghBase + "psicoeducativo.jpg",
+        contenido: `<ul>
+                        <li>Refuerzo Individualizado</li>
+                        <li>Talleres Grupales para Habilidades Sociales</li>
+                    </ul>
+                    <p>Brindamos herramientas de aprendizaje a través de sesiones personalizadas y dinámicas grupales con niños para fomentar su desarrollo integral.</p>`
+    },
+    4: {
+        titulo: "4. Apoyo Sombra",
+        imagen: ghBase + "sombra.jpg",
+        contenido: `<p>Acompañamiento especializado para la inclusión exitosa en entornos educativos regulares.</p>
+                    <p>Nuestra terapeuta trabaja directamente en el aula, facilitando la autonomía del niño y su interacción positiva con el grupo escolar.</p>`
+    }
 };
 
 function openModal(id) {
-  const s = servicios[id];
-  document.getElementById('m-titulo').innerText = s.titulo;
-  document.getElementById('m-img').src = s.img;
-  document.getElementById('m-desc').innerHTML = s.desc;
-  document.getElementById('modalServicio').style.display = 'flex';
+    const data = datosServicios[id];
+    document.getElementById('modalTitulo').textContent = data.titulo;
+    document.getElementById('modalImg').src = data.imagen;
+    document.getElementById('modalContenido').innerHTML = data.contenido;
+    document.getElementById('modalServicio').style.display = 'flex';
 }
 
 function closeModal() {
-  document.getElementById('modalServicio').style.display = 'none';
+    document.getElementById('modalServicio').style.display = 'none';
 }
 
 window.onclick = function(event) {
-  if (event.target == document.getElementById('modalServicio')) {
-    closeModal();
-  }
+    const modal = document.getElementById('modalServicio');
+    if (event.target == modal) {
+        closeModal();
+    }
 }
 </script>
 
