@@ -11,11 +11,12 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
 
 .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-/* Header */
+/* Header Corregido */
 .site-header { background: #1A4B84; color: white; padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
 .site-header .container { display: flex; justify-content: space-between; align-items: center; }
-.logo img { height: 50px; }
-.main-nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 500; }
+.logo img { height: 60px; } /* Ajuste ligero para visibilidad */
+.main-nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 500; transition: 0.3s; }
+.main-nav a:hover { opacity: 0.8; }
 
 /* Grid de Servicios */
 .servicios-grid {
@@ -168,6 +169,24 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
 
 .btn-cta:hover { background: #133863; transform: scale(1.05); }
 
+/* Estilos Footer */
+.site-footer { background: #f4f7f9; padding: 60px 0 20px; border-top: 1px solid #ddd; }
+.footer-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.footer-logos img { object-fit: contain; }
+.contact-info { text-align: center; font-size: 0.9rem; color: #555; }
+.contact-info a { color: #1A4B84; text-decoration: none; font-weight: bold; }
+
+@media (max-width: 768px) {
+  .site-header .container { flex-direction: column; gap: 15px; }
+  .main-nav a { margin: 0 10px; font-size: 0.9rem; }
+}
 </style>
 </head>
 
@@ -175,11 +194,13 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
 
 <header class="site-header">
   <div class="container">
-    <div class="logo"><img src="images/logo.png" alt="Logo Fundación Plenitud"></div>
+    <div class="logo">
+      <img src="images/logo.png" alt="Logo Fundación Plenitud">
+    </div>
     <nav class="main-nav">
       <a href="index.html">Inicio</a>
       <a href="quienes.html">¿Quiénes Somos?</a>
-      <a href="servicios.html" style="text-decoration: underline;">Servicios</a>
+      <a href="servicios.html" style="text-decoration: underline; font-weight: bold;">Servicios</a>
       <a href="contacto.html">Contacto</a>
     </nav>
   </div>
@@ -224,7 +245,7 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
   </div>
 </main>
 
-<!-- MODAL GABINETE PSICOLÓGICO (ESTRUCTURA COMPLETA) -->
+<!-- MODAL GABINETE PSICOLÓGICO -->
 <div id="modal-gabinete" class="modal">
   <div class="modal-content">
     <span class="close-btn" onclick="closeModal('modal-gabinete')">&times;</span>
@@ -235,7 +256,7 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
 
     <div class="service-block">
       <h3>1. El Epicentro del Bienestar</h3>
-      <p>Es el marco profesional donde aplicamos metodologías científicas para el abordaje de la salud mental. Se caracteriza por la confidencialidad, la escucha activa y la aplicación de corrientes terapéuticas (como la Cognitivo-Conductual o Sistémica) adaptadas a cada paciente.</p>
+      <p>Es el marco profesional donde aplicamos metodologías científicas para el abordaje de la salud mental. Se caracteriza por la confidencialidad, la escucha activa y la aplicación de corrientes terapéuticas adaptadas a cada paciente.</p>
       <div class="marketing-pill">
         <span class="pill-title">Propuesta de Valor</span>
         <div class="beneficio-texto">No es una práctica aislada; es un equipo multidisciplinar que ofrece mayor respaldo y rigor científico al paciente.</div>
@@ -249,16 +270,15 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
 
     <div class="service-block">
       <h3>2. Terapia Individual: Reencuéntrate contigo mismo</h3>
-      <p>Un proceso de colaboración destinado a resolver conflictos internos, gestionar síntomas (ansiedad, estrés) y potenciar el autoconocimiento, identificando patrones de pensamiento y adquiriendo herramientas prácticas.</p>
+      <p>Un proceso de colaboración destinado a resolver conflictos internos, gestionar síntomas (ansiedad, estrés) y potenciar el autoconocimiento.</p>
       <div class="marketing-pill">
-        
         <div class="beneficio-texto">"Deja de 'sobrellevar' tus problemas y empieza a vivirlos de otra manera. Recupera el control con herramientas diseñadas para ti."</div>
       </div>
     </div>
 
     <div class="service-block">
       <h3>3. Terapia de Pareja: Reconstruyendo el vínculo</h3>
-      <p>Intervención dirigida a parejas en crisis, problemas de comunicación o falta de intimidad. Actuamos como mediadores neutrales para identificar ciclos negativos y enseñar nuevas formas de validación.</p>
+      <p>Intervención dirigida a parejas en crisis o problemas de comunicación. Actuamos como mediadores neutrales para identificar ciclos negativos.</p>
       <div class="marketing-pill">
         <span class="pill-title">Enfoque de Conexión</span>
         <div class="beneficio-texto">"No se trata de quién tiene la razón, sino de cómo volver a conectar. Transformamos la confrontación en comunicación asertiva."</div>
@@ -267,7 +287,7 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
 
     <div class="service-block">
       <h3>4. Terapia Familiar: Fortaleciendo la base</h3>
-      <p>Abordaje de dinámicas complejas: problemas de conducta, transiciones (divorcios, duelos) o falta de límites. El objetivo es mejorar la cohesión y asegurar que cada miembro sea respetado.</p>
+      <p>Abordaje de dinámicas complejas: problemas de conducta, transiciones o falta de límites. El objetivo es mejorar la cohesión familiar.</p>
       <div class="marketing-pill">
         <span class="pill-title">Mensaje Clave</span>
         <div class="beneficio-texto">"Si una pieza del sistema sufre, todo se afecta. Protegemos la armonía familiar mediante la escucha y el respeto mutuo."</div>
@@ -278,7 +298,7 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
   </div>
 </div>
 
-<!-- MODAL APOYO PSICONEUROLÓGICO (CONTENIDO INTEGRADO) -->
+<!-- MODAL APOYO PSICONEUROLÓGICO -->
 <div id="modal-neuro" class="modal">
   <div class="modal-content">
     <span class="close-btn" onclick="closeModal('modal-neuro')">&times;</span>
@@ -286,16 +306,14 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
       <h2>Apoyo Psiconeurológico</h2>
       <div class="eslogan-highlight">"Potenciando el cerebro para transformar la vida"</div>
     </div>
-
     <div class="service-block">
       <h3>Evaluación y Rehabilitación</h3>
-      <p>Nos especializamos en la relación entre las estructuras cerebrales y el comportamiento. Evaluamos funciones como la memoria, la atención y el lenguaje para diseñar programas de rehabilitación específicos.</p>
+      <p>Nos especializamos en la relación entre las estructuras cerebrales y el comportamiento. Evaluamos funciones como la memoria, la atención y el lenguaje.</p>
       <div class="marketing-pill">
         <span class="pill-title">Enfoque Científico</span>
-        <div class="beneficio-texto">Utilizamos pruebas estandarizadas para entender el perfil neurocognitivo del paciente, permitiendo una intervención precisa en casos de TDAH, dificultades de aprendizaje o daño cerebral.</div>
+        <div class="beneficio-texto">Utilizamos pruebas estandarizadas para entender el perfil neurocognitivo del paciente, permitiendo una intervención precisa.</div>
       </div>
     </div>
-
     <div class="footer-summary">
       "La neurociencia al servicio del desarrollo humano: entendemos cómo funciona tu cerebro para ayudarte a alcanzar tu máximo potencial."
     </div>
@@ -311,21 +329,14 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
       <h2>Apoyo Psicoeducativo</h2>
       <div class="eslogan-highlight">"Aprender a aprender: Formamos mentes capaces"</div>
     </div>
-
     <div class="service-block">
       <h3>Metodología: Fusión Psicología-Educación</h3>
-      <p>Optimizamos el proceso de aprendizaje identificando barreras emocionales o cognitivas. No solo damos clases; capacitamos al alumno para que sea autónomo en su estudio.</p>
+      <p>Optimizamos el proceso de aprendizaje identificando barreras emocionales o cognitivas. Capacitamos al alumno para que sea autónomo en su estudio.</p>
       <div class="marketing-pill">
         <span class="pill-title">Beneficio Directo</span>
-        <div class="beneficio-texto">Desarrollamos estrategias personalizadas que transforman la frustración escolar en progreso visible y confianza en uno mismo.</div>
+        <div class="beneficio-texto">Desarrollamos estrategias personalizadas que transforman la frustración escolar en progreso visible.</div>
       </div>
     </div>
-
-    <div class="service-block">
-      <h3>Refuerzo Individualizado</h3>
-      <p>Abordamos la falta de atención, desorganización, dislexia o discalculia con técnicas efectivas de gestión del tiempo y técnicas de estudio de vanguardia.</p>
-    </div>
-
     <div class="footer-summary">
       "Brindamos herramientas de aprendizaje a través de sesiones dinámicas para fomentar el desarrollo integral del estudiante."
     </div>
@@ -340,32 +351,40 @@ body { margin: 0; background-color: #f4f7f9; color: #333; line-height: 1.6; }
       <h2>Apoyo Sombra</h2>
       <div class="eslogan-highlight">"El Puente hacia la Inclusión Real"</div>
     </div>
-
     <div class="service-block">
       <h3>¿De qué se trata? Mediación Invisible</h3>
-      <p>Es un servicio de acompañamiento terapéutico presencial dentro del entorno escolar. La terapeuta actúa como un facilitador que traduce las demandas del entorno para el niño.</p>
+      <p>Es un servicio de acompañamiento terapéutico presencial dentro del entorno escolar. La terapeuta actúa como un facilitador.</p>
       <div class="marketing-pill">
         <span class="pill-title">Nuestra Misión de Inclusión</span>
-        <div class="beneficio-texto">Ayudamos al alumno a organizarse y regularse emocionalmente, mientras facilitamos que interactúe con sus compañeros de forma autónoma.</div>
+        <div class="beneficio-texto">Ayudamos al alumno a organizarse y regularse emocionalmente, facilitando la autonomía.</div>
       </div>
     </div>
-
-    <div class="service-block">
-      <h3>Impacto en el Aula</h3>
-      <p>Trabajamos directamente en el aula regular, asegurando que el alumno no solo "esté" presente, sino que participe y socialice efectivamente.</p>
-      <div class="marketing-pill">
-        <span class="pill-title">El Gancho</span>
-        <div class="beneficio-texto">"Una presencia que impulsa la autonomía. Damos la seguridad que el niño necesita para volar solo en el futuro."</div>
-      </div>
-    </div>
-
     <div class="footer-summary">
-      "Transformamos el aula en un espacio de verdadera inclusión, eliminando las barreras que impiden el progreso académico y social."
+      "Transformamos el aula en un espacio de verdadera inclusión, eliminando las barreras que impiden el progreso."
     </div>
-    
     <a href="contacto.html" class="btn-cta">Solicitar Información del Servicio</a>
   </div>
 </div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-logos">
+      <img src="images/umss.png" alt="UMSS" height="150" width="150">
+      <img src="images/ColePsico.png" alt="Colegio de Psicólogos" height="150" width="250">
+      <img src="images/humanidades.jpg" alt="Facultad de Humanidades" height="150" width="250">
+      <img src="images/posgrado.jpg" alt="Posgrado" height="150" width="250">
+    </div>
+    
+    <div class="contact-info">
+      <p>WhatsApp: (+591) 674-13-716 | Correo: <a href="mailto:fundacion.plenitud.bo@gmail.com">fundacion.plenitud.bo@gmail.com</a></p>
+      <p>WhatsApp: (+591) 674-39-286 | Teléfono: (+591 - 4) 428-40-25</p>
+      <p>WhatsApp: (+591) 626-90-019</p>
+      <p>Facebook: <a href="https://www.facebook.com/fundacionplenitudbolivia" target="_blank">Fundación Plenitud</a></p>
+      <p style="margin-top:20px; font-weight:bold; color:#1A4B84;">NIT: 382663023 - Régimen General | Reconocimiento Legal: Decreto Departamental N° 3973</p>
+      <p>&copy; 2025 Fundación Plenitud. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
 
 <script>
 function openModal(id) {
